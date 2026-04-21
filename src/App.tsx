@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 // --- 1. 輔助組件：機票卡片 ---
 const FlightCard = ({ type, airline, flightNo, date, time, from, to }: any) => (
-  <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4">
-    <div className="flex justify-between items-center mb-4 text-left">
+  <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4 text-left">
+    <div className="flex justify-between items-center mb-4">
       <span className="bg-[#E9F0EA] text-[#4A6741] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">{type}</span>
       <span className="text-[#8C8579] font-bold text-xs">{airline} {flightNo}</span>
     </div>
@@ -25,12 +25,7 @@ const FlightCard = ({ type, airline, flightNo, date, time, from, to }: any) => (
 
 // --- 2. 輔助組件：底部導覽 ---
 const BottomNav = ({ onTabChange, currentTab }: any) => {
-  const tabs = [
-    { id: '行程', icon: '🗺️' },
-    { id: '預訂', icon: '🎫' },
-    { id: '帳單', icon: '💰' },
-    { id: '準備', icon: '🎒' }
-  ];
+  const tabs = [{ id: '行程', icon: '🗺️' }, { id: '預訂', icon: '🎫' }, { id: '帳單', icon: '💰' }, { id: '準備', icon: '🎒' }];
   return (
     <nav className="fixed bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E5E0D8] p-3 flex justify-around items-center shadow-lg z-50">
       {tabs.map(tab => (
@@ -43,25 +38,34 @@ const BottomNav = ({ onTabChange, currentTab }: any) => {
   );
 };
 
-// --- 3. 完整行程資料  ---
+// --- 3. 完整行程資料 (依據文檔全面補齊) ---
 const scheduleData = [
   { day: "27", items: [
-    { time: "08:30", location: "市區", title: "在地早餐 🥣", remark: "建議尋找傳統廣東粥。" },
-    { time: "09:30", location: "水頭/珠山/歐厝", title: "三大聚落美學 🏛️", remark: "拍攝重點：水頭洋樓、珠山與歐厝古厝群。" },
-    { time: "15:30", location: "建功嶼/湖下", title: "海際線與沙紋 🌊", remark: "捕捉建功嶼石像與海堤沙紋。" },
-    { time: "18:00", location: "慈堤", title: "慈堤黃昏夕陽 🌅", remark: "捕捉金門最美日落。" },
-    { time: "20:00", location: "後浦老街", title: "後浦夜拍 🌙", remark: "紅燈籠與戰後建築夜間氛圍。" }
+    { time: "08:30", location: "市區", title: "金門早餐", remark: "開啟味蕾之旅。" },
+    { time: "09:30", location: "水頭/珠山/歐厝", title: "古厝聚落巡禮", remark: "人文與建築層次，適合廣角攝影。" },
+    { time: "13:30", location: "明遺老街/翟山坑道", title: "備選：歷史軌跡", remark: "坑道倒影或老街古樸氛圍。" },
+    { time: "15:30", location: "建功嶼/湖下海堤", title: "建功嶼與海堤沙紋", remark: "注意潮汐，拍攝獨特沙紋理攝影。" },
+    { time: "18:00", location: "慈堤", title: "慈堤黃昏夕照", remark: "捕捉金門最美日落。" },
+    { time: "20:00", location: "後浦老街", title: "後浦老街夜拍", remark: "紅燈籠與人文煙火氣。" }
   ]},
   { day: "28", items: [
-    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "年度盛典！捕捉祭典陣頭張力。" },
-    { time: "17:30", location: "嚨口沙灘", title: "軌條砦夕照 🛡️", remark: "利用軌條砦拍出戰地電影感。" }
+    { time: "08:30", location: "瓊林", title: "瓊林聚落巡禮", remark: "清晨光線柔和，拍紅磚巷弄。" },
+    { time: "11:00", location: "金城鎮", title: "金城迎城隍盛典", remark: "本次核心！捕捉祭典陣頭張力。" },
+    { time: "15:30", location: "南北山聚落", title: "南、北山巡禮", remark: "人文細節與生活氣息紀錄。" },
+    { time: "17:30", location: "嚨口沙灘", title: "嚨口軌條砦夕照", remark: "拍出戰地電影感的前景。" },
+    { time: "20:00", location: "小金門/大橋", title: "小金門探訪與大橋夜拍", remark: "金門大橋壯麗線條與夜景。" }
   ]},
   { day: "29", items: [
-    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態 🐦", remark: "捕捉蜂虎優美姿態。" },
-    { time: "14:30", location: "沙美老街", title: "生活肌理攝影 💈", remark: "沙美老理髮店人文肖像。" }
+    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影", remark: "夏季限定，長焦捕捉飛行色彩。" },
+    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街", remark: "對稱建築與懷舊場景。" },
+    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街", remark: "沙美老理髮店的人文肖像紀錄。" },
+    { time: "19:30", location: "瓊林聚落", title: "瓊林夜巡夜拍", remark: "夜間聚落古樸低光影層次。" }
   ]},
   { day: "30", items: [
-    { time: "11:00", location: "漁村坑道", title: "坑道對稱美學 ⚓", remark: "利用坑道倒影創造震撼對稱感。" }
+    { time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄", remark: "自然光影與湖光色影。" },
+    { time: "11:00", location: "漁村小艇坑道", title: "漁村小艇坑道 (E-092)", remark: "極致對稱與坑道光影美學。" },
+    { time: "13:30", location: "軍事據點", title: "軍事據點探訪", remark: "尋找被時間遺忘的碉堡細節。" },
+    { time: "15:30", location: "機場", title: "回程與整理", remark: "結束充實的金門攝影之旅。" }
   ]}
 ];
 
@@ -70,7 +74,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('行程');
   const [selectedDay, setSelectedDay] = useState('27');
   
-  // 帳單狀態
+  // 帳單邏輯
   const [expenses, setExpenses] = useState<{id: number, item: string, amount: number}[]>(() => {
     const saved = localStorage.getItem('expenses');
     return saved ? JSON.parse(saved) : [];
@@ -78,7 +82,7 @@ export default function App() {
   const [newItem, setNewItem] = useState('');
   const [newAmount, setNewAmount] = useState('');
 
-  // 編輯狀態
+  // 編輯邏輯
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editItem, setEditItem] = useState('');
   const [editAmount, setEditAmount] = useState('');
@@ -93,35 +97,23 @@ export default function App() {
     localStorage.setItem('checkedIds', JSON.stringify(checkedIds));
   }, [expenses, checkedIds]);
 
-  // 新增
   const addExpense = () => {
     if (!newItem || !newAmount) return;
     setExpenses([{ id: Date.now(), item: newItem, amount: Number(newAmount) }, ...expenses]);
     setNewItem(''); setNewAmount('');
   };
 
-  // 開始編輯
   const startEdit = (exp: any) => {
-    setEditingId(exp.id);
-    setEditItem(exp.item);
-    setEditAmount(exp.amount.toString());
+    setEditingId(exp.id); setEditItem(exp.item); setEditAmount(exp.amount.toString());
   };
 
-  // 儲存編輯
   const saveEdit = () => {
     setExpenses(expenses.map(e => e.id === editingId ? { ...e, item: editItem, amount: Number(editAmount) } : e));
     setEditingId(null);
   };
 
-  // 刪除
-  const deleteExpense = (id: number) => {
-    setExpenses(expenses.filter(e => e.id !== id));
-  };
-
-  const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
-
   return (
-    <div className="min-h-screen bg-[#F8F5F0] pb-32 font-sans text-[#3D3A36] text-left">
+    <div className="min-h-screen bg-[#F8F5F0] pb-32 font-sans text-[#3D3A36] text-left transition-all">
       <header className="p-8 pt-12 flex justify-between items-end">
         <div>
           <p className="text-[#4A6741] font-bold text-[10px] tracking-widest mb-1 uppercase">May 2026</p>
@@ -129,7 +121,7 @@ export default function App() {
         </div>
         <div className="text-right">
           <span className="text-[10px] font-bold text-[#8C8579] block uppercase">Total Spent</span>
-          <span className="text-2xl font-black text-[#4A6741]">NT${totalSpent}</span>
+          <span className="text-2xl font-black text-[#4A6741]">NT${expenses.reduce((sum, e) => sum + e.amount, 0)}</span>
         </div>
       </header>
 
@@ -155,17 +147,14 @@ export default function App() {
 
         {activeTab === '帳單' && (
           <div className="space-y-6">
-            {/* 新增欄位 */}
             <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm">
               <h3 className="font-bold text-xs text-[#8C8579] mb-4 uppercase tracking-widest">Quick Add</h3>
               <div className="flex space-x-2">
-                <input type="text" placeholder="項目" value={newItem} onChange={(e) => setNewItem(e.target.value)} className="flex-2 w-full p-4 rounded-2xl bg-[#F8F5F0] border-0 font-bold text-sm" />
-                <input type="number" placeholder="$" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} className="flex-1 w-24 p-4 rounded-2xl bg-[#F8F5F0] border-0 font-bold text-sm" />
+                <input type="text" placeholder="項目" value={newItem} onChange={(e) => setNewItem(e.target.value)} className="w-full p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm" />
+                <input type="number" placeholder="$" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} className="w-24 p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm" />
                 <button onClick={addExpense} className="p-4 bg-[#4A6741] text-white rounded-2xl font-black">＋</button>
               </div>
             </div>
-
-            {/* 列表 */}
             <div className="space-y-3">
               {expenses.map(exp => (
                 <div key={exp.id} className="bg-white p-4 px-6 rounded-2xl border-2 border-[#E5E0D8] shadow-sm">
@@ -177,45 +166,5 @@ export default function App() {
                     </div>
                   ) : (
                     <div className="flex justify-between items-center">
-                      <div className="flex flex-col">
-                        <span className="font-black text-lg">{exp.item}</span>
-                        <span className="text-[10px] font-bold text-[#8C8579] uppercase">Expense</span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <span className="font-black text-[#4A6741] text-xl">${exp.amount}</span>
-                        <div className="flex space-x-2 opacity-30">
-                          <button onClick={() => startEdit(exp)}>📝</button>
-                          <button onClick={() => deleteExpense(exp.id)}>✕</button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* 預訂與準備分頁... (維持原樣) */}
-        {activeTab === '預訂' && (
-          <div>
-            <FlightCard type="去程" airline="立榮航空" flightNo="B7-8801" date="2026.05.27" time="07:00 - 08:05" from="TSA" to="KNH" />
-            <FlightCard type="回程" airline="立榮航空" flightNo="B7-8836" date="2026.05.30" time="20:15 - 21:15" from="KNH" to="TSA" />
-          </div>
-        )}
-        {activeTab === '準備' && (
-          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden">
-            {[ {id:1, task:"廣角鏡頭"}, {id:2, task:"長焦鏡頭"}, {id:3, task:"身分證/機票"} ].map(item => (
-              <div key={item.id} onClick={() => setCheckedIds(prev => prev.includes(item.id) ? prev.filter(i => i !== item.id) : [...prev, item.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
-                <span className="text-2xl mr-4">{checkedIds.includes(item.id) ? '✅' : '⬜'}</span>
-                <span className={`font-bold ${checkedIds.includes(item.id) ? 'line-through opacity-30' : ''}`}>{item.task}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
-
-      <BottomNav onTabChange={setActiveTab} currentTab={activeTab} />
-    </div>
-  );
-}
+                      <div className="flex flex-col text-left">
+                        <span
