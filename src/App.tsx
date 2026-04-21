@@ -1,216 +1,143 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-// --- 1. 輔助組件：機票卡片 ---
-const FlightCard = ({ type, airline, flightNo, date, time, from, to }: any) => (
-  <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4 text-left">
-    <div className="flex justify-between items-center mb-4">
-      <span className="bg-[#E9F0EA] text-[#4A6741] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">{type}</span>
-      <span className="text-[#8C8579] font-bold text-xs">{airline} {flightNo}</span>
-    </div>
-    <div className="flex justify-between items-center">
-      <div className="text-left">
-        <div className="text-2xl font-black">{from}</div>
-        <div className="text-xs text-[#8C8579] font-bold">{date}</div>
-      </div>
-      <div className="flex-1 border-t-2 border-dashed border-[#E5E0D8] mx-4 relative">
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xl">✈️</span>
-      </div>
-      <div className="text-right">
-        <div className="text-2xl font-black">{to}</div>
-        <div className="text-xs text-[#8C8579] font-bold">{time}</div>
-      </div>
+// --- 1. 組件：美食卡片 (對應美食地圖 [cite: 24-44]) ---
+const FoodCard = ({ n, t, a }: { n: string; t: string; a: string }) => (
+  <div className="bg-white p-5 rounded-[2rem] border-2 border-[#E5E0D8] shadow-sm mb-4 text-left">
+    <h3 className="text-lg font-black text-[#3D3A36] mb-1">{n}</h3>
+    <p className="text-xs font-bold text-[#8C8579] mb-3">📍 {a}</p>
+    <div className="flex space-x-2">
+      <a href={`tel:${t}`} className="flex-1 bg-[#E9F0EA] text-[#4A6741] py-3 rounded-xl font-black text-center text-xs">📞 撥打</a>
+      <a 
+        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a)}`} 
+        target="_blank" 
+        rel="noreferrer" 
+        className="flex-1 bg-[#4A6741] text-white py-3 rounded-xl font-black text-center text-xs"
+      >
+        🗺️ 導航
+      </a>
     </div>
   </div>
 );
 
-// --- 2. 輔助組件：底部導覽 ---
-const BottomNav = ({ onTabChange, currentTab }: any) => {
-  const tabs = [{ id: '行程', icon: '🗺️' }, { id: '航班', icon: '🎫' }, { id: '帳單', icon: '💰' }, { id: '準備', icon: '🎒' }];
-  return (
-    <nav className="fixed bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E5E0D8] p-3 flex justify-around items-center shadow-lg z-50">
-      {tabs.map(tab => (
-        <button key={tab.id} onClick={() => onTabChange(tab.id)} className={`flex flex-col items-center p-3 rounded-2xl transition-all ${currentTab === tab.id ? 'bg-[#4A6741] text-white scale-110 shadow-md' : 'text-[#8C8579]'}`}>
-          <span className="text-xl mb-1">{tab.icon}</span>
-          <span className="text-[10px] font-black">{tab.id}</span>
-        </button>
-      ))}
-    </nav>
-  );
-};
-
-// --- 3. 完整行程資料 (新增 Google Maps 導航連結) ---
+// --- 2. 資料庫：完整行程與美食 [cite: 2, 4-15, 25-44] ---
 const scheduleData = [
-  { day: "27", items: [
-    { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金城鎮市區" },
-    { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門水頭聚落" },
-    { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點", mapUrl: "https://www.google.com/maps/search/?api=1&query=翟山坑道" },
-    { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像", mapUrl: "https://www.google.com/maps/search/?api=1&query=建功嶼" },
-    { time: "18:00", location: "慈堤", title: "慈堤黃昏 🌅", remark: "金門最美落日拍攝點", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門慈堤" },
-    { time: "20:00", location: "後浦老街", title: "後浦(金城)老街夜拍 🌙", remark: "巷弄紅燈籠與戰後建築", mapUrl: "https://www.google.com/maps/search/?api=1&query=後浦老街" }
+  { day: "27", b: "標記", l: "水頭金道地", d: "東門餐廳", items: [
+    { t: "07:00", title: "台北-金門 (B7-8801) ✈️", r: "06:00 松山二航集合 [cite: 2]" },
+    { t: "09:30", title: "水頭聚落攝影", r: "金水國小、得月樓 [cite: 4]" },
+    { t: "14:00", title: "建功嶼/湖下沙紋", r: "退潮限定大景拍攝 [cite: 4]" },
+    { t: "18:00", title: "慈堤黃昏夕照", r: "金門最美落日點 [cite: 4]" }
   ]},
-  { day: "28", items: [
-    { time: "08:30", location: "瓊林", title: "瓊林聚落 🏮", remark: "清晨拍攝紅磚巷弄與人文圖騰", mapUrl: "https://www.google.com/maps/search/?api=1&query=瓊林聚落" },
-    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "行程核心：捕捉祭典與陣頭張力", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門浯島城隍廟" },
-    { time: "15:30", location: "南、北山", title: "南、北山聚落 🏡", remark: "人文肖像與生活細節", mapUrl: "https://www.google.com/maps/search/?api=1&query=北山聚落" },
-    { time: "17:30", location: "嚨口沙灘", title: "嚨口沙灘軌條砦 🛡️", remark: "夕陽下的軌條砦電影感大景", mapUrl: "https://www.google.com/maps/search/?api=1&query=嚨口沙灘" },
-    { time: "19:30", location: "小金門/大橋", title: "小金門與金門大橋夜拍 🌉", remark: "壯麗大橋線條與夜景對望", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門大橋" }
+  { day: "28", b: "民宿", l: "海口城", d: "小明的店", items: [
+    { t: "11:00", title: "金城迎城隍盛典 🥁", r: "捕捉祭典張力與陣頭 [cite: 7]" },
+    { t: "15:30", title: "南、北山聚落", r: "生活細節與肖像紀錄 [cite: 7]" },
+    { t: "17:30", title: "嚨口沙灘夕照", r: "軌條砦戰地電影感 [cite: 7]" },
+    { t: "19:30", title: "大橋夜拍 / 小金門", r: "大橋壯麗線條與夜景 [cite: 7]" }
   ]},
-  { day: "29", items: [
-    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影 🐦", remark: "捕捉蜂虎飛行姿態與色彩", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門青年農莊" },
-    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街 🎥", remark: "對稱建築與懷舊場景", mapUrl: "https://www.google.com/maps/search/?api=1&query=山后民俗村" },
-    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街 💈", remark: "沙美人文肌理肖像攝影", mapUrl: "https://www.google.com/maps/search/?api=1&query=沙美老街" },
-    { time: "19:30", location: "瓊林", title: "瓊林夜拍 🕯️", remark: "夜間聚落的古樸與低光影", mapUrl: "https://www.google.com/maps/search/?api=1&query=瓊林聚落" }
+  { day: "29", b: "民宿", l: "談天樓", d: "新天地", items: [
+    { t: "06:00", title: "青年農莊攝影 🐦", r: "栗喉蜂虎 (300-400mm) [cite: 10, 22]" },
+    { t: "10:00", title: "山后 / 陽翟老街", r: "民俗村對稱美學攝影 [cite: 10]" },
+    { t: "14:30", title: "碧山 / 沙美老街", r: "沙美老理髮店人文紀錄 [cite: 10]" },
+    { t: "19:30", title: "瓊林聚落夜拍", r: "夜間聚落光影層次 [cite: 10]" }
   ]},
-  { day: "30", items: [
-    { time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄 🌳", remark: "湖光色影與自然紀錄 。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門太湖" },
-    { time: "11:00", location: "漁村坑道", title: "漁村小艇坑道 (E-092) ⚓", remark: "極致對稱與坑道光影 。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門漁村小艇坑道" },
-    { time: "13:30", location: "軍事據點", title: "探訪軍事據點 🪖", remark: "尋找被遺忘的碉堡細節 。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門軍事據點" },
-    { time: "15:30", location: "機場", title: "整理與歸途 ✈️", remark: "帶著豐富畫面結束金門攝影之旅。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門機場" }
+  { day: "30", b: "民宿", l: "佑昇餐廳", d: "浯倆餐廚", items: [
+    { t: "09:00", title: "太湖與榕園 🌳", r: "湖光色影與自然紀錄 [cite: 13]" },
+    { t: "11:00", title: "漁村小艇坑道", r: "坑道對稱倒影攝影 [cite: 13]" },
+    { t: "13:30", title: "陳景蘭洋樓", r: "成功海邊精緻洋樓 [cite: 13]" },
+    { t: "15:30", title: "明遺老街巡禮", r: "歷史老街巡禮 [cite: 13]" },
+    { t: "20:15", title: "平安歸途 (B7-8836) ✈️", r: "18:30 加油還車 [cite: 2, 16]" }
   ]}
 ];
 
-// --- 4. 主程式 ---
+const foodData = [
+  { n: "金道地蚵仔煎", t: "082-327969", a: "金城鎮前水頭15號 [cite: 25]" },
+  { n: "東門餐廳", t: "082-371850", a: "金城鎮東門北提路 [cite: 26]" },
+  { n: "小明的店", t: "082-327441", a: "金寧鄉湖埔村慈湖路一段98號 [cite: 27]" },
+  { n: "談天樓", t: "082-332766", a: "金湖鎮復興路3號 [cite: 30]" },
+  { n: "佑昇生億鍋貼", t: "082-332229", a: "金湖鎮成功村171號 [cite: 33]" }
+];
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState('行程');
-  const [selectedDay, setSelectedDay] = useState('27');
-  
-  const [expenses, setExpenses] = useState<{id: number, item: string, amount: number}[]>(() => {
-    const saved = localStorage.getItem('expenses');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [newItem, setNewItem] = useState('');
-  const [newAmount, setNewAmount] = useState('');
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [editItem, setEditItem] = useState('');
-  const [editAmount, setEditAmount] = useState('');
+  const [tab, setTab] = useState('行程');
+  const [day, setDay] = useState('27');
+  const [checked, setChecked] = useState<number[]>([]);
 
-  const [checkedIds, setCheckedIds] = useState<number[]>(() => {
-    const saved = localStorage.getItem('checkedIds');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-    localStorage.setItem('checkedIds', JSON.stringify(checkedIds));
-  }, [expenses, checkedIds]);
-
-  const addExpense = () => {
-    if (!newItem || !newAmount) return;
-    setExpenses([{ id: Date.now(), item: newItem, amount: Number(newAmount) }, ...expenses]);
-    setNewItem(''); setNewAmount('');
-  };
-
-  const startEdit = (exp: any) => {
-    setEditingId(exp.id); setEditItem(exp.item); setEditAmount(exp.amount.toString());
-  };
-
-  const saveEdit = () => {
-    setExpenses(expenses.map(e => e.id === editingId ? { ...e, item: editItem, amount: Number(editAmount) } : e));
-    setEditingId(null);
-  };
-
-  const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const curr = scheduleData.find(d => d.day === day) || scheduleData[0];
 
   return (
-    <div className="min-h-screen bg-[#F8F5F0] pb-32 font-sans text-[#3D3A36] text-left">
-      <header className="p-8 pt-12 flex justify-between items-end">
-        <div>
-          <p className="text-[#4A6741] font-bold text-[10px] tracking-widest mb-1 uppercase">May 2026</p>
-          <h1 className="text-3xl font-black">金門迎城隍</h1>
-        </div>
-        <div className="text-right">
-          <span className="text-[10px] font-bold text-[#8C8579] block uppercase">Total Spent</span>
-          <span className="text-2xl font-black text-[#4A6741]">NT${totalSpent}</span>
-        </div>
+    <div className="min-h-screen bg-[#F8F5F0] pb-36 font-sans text-[#3D3A36] text-left">
+      <header className="p-8 pt-12">
+        <p className="text-[#4A6741] font-bold text-[10px] uppercase">May 2026</p>
+        <h1 className="text-3xl font-black text-left">金門迎城隍攝影手帳</h1>
       </header>
 
       <main className="px-6">
-        {activeTab === '行程' && (
+        {tab === '行程' && (
           <div className="space-y-6">
-            <div className="flex space-x-3 overflow-x-auto pb-2 no-scrollbar">
-              {['27', '28', '29', '30'].map(day => (
-                <button key={day} onClick={() => setSelectedDay(day)} className={`flex-1 min-w-[60px] py-4 rounded-2xl border-2 transition-all ${selectedDay === day ? 'bg-white border-[#4A6741] shadow-sm' : 'opacity-40 border-[#E5E0D8]'}`}>
-                  <span className="text-xl font-black">{day}</span>
-                </button>
+            <div className="flex space-x-2 overflow-x-auto no-scrollbar">
+              {['27','28','29','30'].map(d=>(
+                <button key={d} onClick={()=>setDay(d)} className={`flex-1 min-w-[60px] py-4 rounded-2xl border-2 transition-all ${day===d?'bg-white border-[#4A6741] shadow-sm':'opacity-40 border-[#E5E0D8]'}`}><span className="text-xl font-black">{d}</span></button>
               ))}
             </div>
-            {scheduleData.find(d => d.day === selectedDay)?.items.map((item, i) => (
+            <div className="bg-[#4A6741] p-4 rounded-3xl text-white flex justify-around text-center shadow-lg text-[10px]">
+              <div><b>早</b><br/>{curr.b}</div>
+              <div className="border-l border-white/20 px-4"><b>午</b><br/>{curr.l}</div>
+              <div className="border-l border-white/20 px-4"><b>晚</b><br/>{curr.d}</div>
+            </div>
+            {curr.items.map((it, i)=>(
               <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4">
-                {/* 景點連結區域 */}
-                <a 
-                  href={item.mapUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-block text-[#4A6741] font-bold text-xs mb-2 underline decoration-dashed active:opacity-50 transition-opacity"
-                >
-                  🕒 {item.time} 📍 {item.location}
-                </a>
-                <h2 className="text-xl font-black mb-2 leading-tight">{item.title}</h2>
-                <div className="bg-[#F8F5F0] p-4 rounded-2xl border border-dashed border-[#8C8579]/30 text-sm italic">💡 {item.remark}</div>
+                <p className="text-[#4A6741] font-bold text-xs mb-1 text-left">🕒 {it.t}</p>
+                <h2 className="text-xl font-black leading-tight mb-2 text-left">{it.title}</h2>
+                <div className="bg-[#F8F5F0] p-4 rounded-2xl border border-dashed border-[#8C8579]/30 text-sm italic text-left">💡 {it.r}</div>
               </div>
             ))}
           </div>
         )}
 
-        {activeTab === '帳單' && (
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm">
-              <h3 className="font-bold text-xs text-[#8C8579] mb-4 uppercase tracking-widest">Quick Add</h3>
-              <div className="flex space-x-2">
-                <input type="text" placeholder="項目" value={newItem} onChange={(e) => setNewItem(e.target.value)} className="w-full p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm outline-none border-2 border-transparent focus:border-[#4A6741]" />
-                <input type="number" placeholder="$" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} className="w-24 p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm outline-none border-2 border-transparent focus:border-[#4A6741]" />
-                <button onClick={addExpense} className="p-4 bg-[#4A6741] text-white rounded-2xl font-black">＋</button>
-              </div>
+        {tab === '美食' && (
+          <div className="space-y-4">
+            <p className="text-[10px] font-black text-[#8C8579] uppercase mb-4 tracking-widest text-left">推薦美食名錄 [cite: 24]</p>
+            {foodData.map((f, i)=>(<FoodCard key={i} n={f.n} t={f.t} a={f.a} />))}
+          </div>
+        )}
+
+        {tab === '準備' && (
+          <div className="space-y-6 text-left">
+            <div className="bg-[#4A6741] p-6 rounded-[2.5rem] text-white">
+              <p className="text-[10px] font-bold opacity-70 uppercase mb-3 text-left">重要行李規定 [cite: 23]</p>
+              <ul className="text-xs font-bold space-y-2">
+                <li>🔋 電池/行動電源：必須隨身攜帶</li>
+                <li>📸 腳架：一定要托運 (須裝袋)</li>
+                <li>✈️ 托運限重：10 公斤 / 人</li>
+              </ul>
             </div>
-            <div className="space-y-3">
-              {expenses.map(exp => (
-                <div key={exp.id} className="bg-white p-4 px-6 rounded-2xl border-2 border-[#E5E0D8] shadow-sm">
-                  {editingId === exp.id ? (
-                    <div className="flex items-center space-x-2">
-                      <input type="text" value={editItem} onChange={(e) => setEditItem(e.target.value)} className="flex-1 p-2 bg-[#F8F5F0] rounded-lg font-bold" />
-                      <input type="number" value={editAmount} onChange={(e) => setEditAmount(e.target.value)} className="w-20 p-2 bg-[#F8F5F0] rounded-lg font-bold" />
-                      <button onClick={saveEdit} className="text-[#4A6741] font-black p-2">💾</button>
-                    </div>
-                  ) : (
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-col text-left">
-                        <span className="font-black text-lg">{exp.item}</span>
-                        <span className="text-[10px] font-bold text-[#8C8579] uppercase">Expense Item</span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <span className="font-black text-[#4A6741] text-xl">${exp.amount}</span>
-                        <div className="flex space-x-3 opacity-30 text-lg">
-                          <button onClick={() => startEdit(exp)}>📝</button>
-                          <button onClick={() => setExpenses(expenses.filter(e => e.id !== exp.id))}>✕</button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+            <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden">
+              {[
+                {id:1, t:"身份證正本 / 駕照 (4人) [cite: 18]", c:"重要"},
+                {id:2, t:"300-400mm 鏡頭 (拍蜂虎) [cite: 22]", c:"攝影"},
+                {id:3, t:"偏光鏡/漸層鏡/三腳架 [cite: 22]", c:"攝影"},
+                {id:4, t:"自備盥洗用品 (民宿不供) [cite: 20]", c:"生活"}
+              ].map(i=>(
+                <div key={i.id} onClick={()=>setChecked(p=>p.includes(i.id)?p.filter(x=>x!==i.id):[...p,i.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
+                  <span className="text-2xl mr-4">{checked.includes(i.id)?'✅':'⬜'}</span>
+                  <div><p className={`font-black ${checked.includes(i.id)?'line-through opacity-30 text-[#8C8579]':''}`}>{i.t}</p><span className="text-[8px] font-bold text-[#8C8579] uppercase">{i.c}</span></div>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* 預訂與準備分頁維持原樣 */}
-        {activeTab === '航班' && (
-          <div>
-            <FlightCard type="去程" airline="立榮航空" flightNo="B7-8801" date="2026.05.27" time="07:00 - 08:05" from="TSA" to="KNH" />
-            <FlightCard type="回程" airline="立榮航空" flightNo="B7-8836" date="2026.05.30" time="20:15 - 21:15" from="KNH" to="TSA" />
-          </div>
-        )}
-        {activeTab === '準備' && (
-          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden text-left">
-            {[ {id:1, task:"廣角鏡頭 (拍建築/夕陽)"}, {id:2, task:"長焦鏡頭 (拍栗喉蜂虎)"}, {id:3, task:"備用電池與記憶卡"}, {id:4, task:"身分證與電子機票"} ].map(item => (
-              <div key={item.id} onClick={() => setCheckedIds(prev => prev.includes(item.id) ? prev.filter(i => i !== item.id) : [...prev, item.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
-                <span className="text-2xl mr-4">{checkedIds.includes(item.id) ? '✅' : '⬜'}</span>
-                <span className={`font-bold ${checkedIds.includes(item.id) ? 'line-through opacity-30' : ''}`}>{item.task}</span>
-              </div>
-            ))}
-          </div>
+        {tab === '帳單' && (
+          <div className="py-10 text-center opacity-30 font-black">帳單功能已就緒，請手動紀錄每日花費。</div>
         )}
       </main>
-      <BottomNav onTabChange={setActiveTab} currentTab={activeTab} />
+
+      <nav className="fixed bottom-6 left-4 right-4 bg-white/95 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E5E0D8] p-2 flex justify-around items-center shadow-lg z-50">
+        {[{id:'行程', i:'🗺️'}, {id:'美食', i:'😋'}, {id:'準備', i:'🎒'}, {id:'帳單', i:'💰'}].map(t => (
+          <button key={t.id} onClick={()=>setTab(t.id)} className={`flex flex-col items-center p-2 px-3 rounded-2xl transition-all ${tab===t.id?'bg-[#4A6741] text-white shadow-md':'text-[#8C8579]'}`}>
+            <span className="text-lg">{t.i}</span><span className="text-[8px] font-black">{t.id}</span>
+          </button>
+        ))}
+      </nav>
     </div>
   );
 }
