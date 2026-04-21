@@ -38,34 +38,34 @@ const BottomNav = ({ onTabChange, currentTab }: any) => {
   );
 };
 
-// --- 3. 完整行程資料 (依據 docx 補齊) [cite: 1-9] ---
+// --- 3. 完整行程資料 (新增 Google Maps 導航連結) ---
 const scheduleData = [
   { day: "27", items: [
-    { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。" },
-    { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落" },
-    { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點" },
-    { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像" },
-    { time: "18:00", location: "慈堤", title: "慈堤黃昏 🌅", remark: "金門最美落日拍攝點" },
-    { time: "20:00", location: "後浦老街", title: "後浦(金城)老街夜拍 🌙", remark: "巷弄紅燈籠與戰後建築" }
+    { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金城鎮市區" },
+    { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門水頭聚落" },
+    { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點", mapUrl: "https://www.google.com/maps/search/?api=1&query=翟山坑道" },
+    { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像", mapUrl: "https://www.google.com/maps/search/?api=1&query=建功嶼" },
+    { time: "18:00", location: "慈堤", title: "慈堤黃昏 🌅", remark: "金門最美落日拍攝點", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門慈堤" },
+    { time: "20:00", location: "後浦老街", title: "後浦(金城)老街夜拍 🌙", remark: "巷弄紅燈籠與戰後建築", mapUrl: "https://www.google.com/maps/search/?api=1&query=後浦老街" }
   ]},
   { day: "28", items: [
-    { time: "08:30", location: "瓊林", title: "瓊林聚落 🏮", remark: "清晨拍攝紅磚巷弄與人文圖騰" },
-    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "行程核心：捕捉祭典與陣頭張力" },
-    { time: "15:30", location: "南、北山", title: "南、北山聚落 🏡", remark: "人文肖像與生活細節" },
-    { time: "17:30", location: "嚨口沙灘", title: "嚨口沙灘軌條砦 🛡️", remark: "夕陽下的軌條砦電影感大景" },
-    { time: "19:30", location: "小金門/大橋", title: "小金門與金門大橋夜拍 🌉", remark: "壯麗大橋線條與夜景對望" }
+    { time: "08:30", location: "瓊林", title: "瓊林聚落 🏮", remark: "清晨拍攝紅磚巷弄與人文圖騰", mapUrl: "https://www.google.com/maps/search/?api=1&query=瓊林聚落" },
+    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "行程核心：捕捉祭典與陣頭張力", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門浯島城隍廟" },
+    { time: "15:30", location: "南、北山", title: "南、北山聚落 🏡", remark: "人文肖像與生活細節", mapUrl: "https://www.google.com/maps/search/?api=1&query=北山聚落" },
+    { time: "17:30", location: "嚨口沙灘", title: "嚨口沙灘軌條砦 🛡️", remark: "夕陽下的軌條砦電影感大景", mapUrl: "https://www.google.com/maps/search/?api=1&query=嚨口沙灘" },
+    { time: "19:30", location: "小金門/大橋", title: "小金門與金門大橋夜拍 🌉", remark: "壯麗大橋線條與夜景對望", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門大橋" }
   ]},
   { day: "29", items: [
-    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影 🐦", remark: "捕捉蜂虎飛行姿態與色彩" },
-    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街 🎥", remark: "對稱建築與懷舊場景" },
-    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街(老理髮店) 💈", remark: "沙美人文肌理肖像攝影" },
-    { time: "19:30", location: "瓊林", title: "瓊林夜拍 🕯️", remark: "夜間聚落的古樸與低光影" }
+    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影 🐦", remark: "捕捉蜂虎飛行姿態與色彩", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門青年農莊" },
+    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街 🎥", remark: "對稱建築與懷舊場景", mapUrl: "https://www.google.com/maps/search/?api=1&query=山后民俗村" },
+    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街 💈", remark: "沙美人文肌理肖像攝影", mapUrl: "https://www.google.com/maps/search/?api=1&query=沙美老街" },
+    { time: "19:30", location: "瓊林", title: "瓊林夜拍 🕯️", remark: "夜間聚落的古樸與低光影", mapUrl: "https://www.google.com/maps/search/?api=1&query=瓊林聚落" }
   ]},
   { day: "30", items: [
-    { time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄 🌳", remark: "湖光色影與自然紀錄 。" },
-    { time: "11:00", location: "漁村坑道", title: "漁村小艇坑道 (E-092) ⚓", remark: "極致對稱與坑道光影 。" },
-    { time: "13:30", location: "軍事據點", title: "探訪軍事據點 🪖", remark: "尋找被遺忘的碉堡細節 。" },
-    { time: "15:30", location: "機場", title: "整理與歸途 ✈️", remark: "帶著豐富畫面結束金門攝影之旅。" }
+    { time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄 🌳", remark: "湖光色影與自然紀錄 。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門太湖" },
+    { time: "11:00", location: "漁村坑道", title: "漁村小艇坑道 (E-092) ⚓", remark: "極致對稱與坑道光影 。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門漁村小艇坑道" },
+    { time: "13:30", location: "軍事據點", title: "探訪軍事據點 🪖", remark: "尋找被遺忘的碉堡細節 。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門軍事據點" },
+    { time: "15:30", location: "機場", title: "整理與歸途 ✈️", remark: "帶著豐富畫面結束金門攝影之旅。", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門機場" }
   ]}
 ];
 
@@ -136,7 +136,15 @@ export default function App() {
             </div>
             {scheduleData.find(d => d.day === selectedDay)?.items.map((item, i) => (
               <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4">
-                <div className="text-[#4A6741] font-bold text-xs mb-2">🕒 {item.time} 📍 {item.location}</div>
+                {/* 景點連結區域 */}
+                <a 
+                  href={item.mapUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-block text-[#4A6741] font-bold text-xs mb-2 underline decoration-dashed active:opacity-50 transition-opacity"
+                >
+                  🕒 {item.time} 📍 {item.location}
+                </a>
                 <h2 className="text-xl font-black mb-2 leading-tight">{item.title}</h2>
                 <div className="bg-[#F8F5F0] p-4 rounded-2xl border border-dashed border-[#8C8579]/30 text-sm italic">💡 {item.remark}</div>
               </div>
@@ -165,9 +173,9 @@ export default function App() {
                     </div>
                   ) : (
                     <div className="flex justify-between items-center">
-                      <div className="flex flex-col">
+                      <div className="flex flex-col text-left">
                         <span className="font-black text-lg">{exp.item}</span>
-                        <span className="text-[10px] font-bold text-[#8C8579] uppercase">Expense</span>
+                        <span className="text-[10px] font-bold text-[#8C8579] uppercase">Expense Item</span>
                       </div>
                       <div className="flex items-center space-x-4">
                         <span className="font-black text-[#4A6741] text-xl">${exp.amount}</span>
@@ -192,7 +200,7 @@ export default function App() {
           </div>
         )}
         {activeTab === '準備' && (
-          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden">
+          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden text-left">
             {[ {id:1, task:"廣角鏡頭 (拍建築/夕陽)"}, {id:2, task:"長焦鏡頭 (拍栗喉蜂虎)"}, {id:3, task:"備用電池與記憶卡"}, {id:4, task:"身分證與電子機票"} ].map(item => (
               <div key={item.id} onClick={() => setCheckedIds(prev => prev.includes(item.id) ? prev.filter(i => i !== item.id) : [...prev, item.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
                 <span className="text-2xl mr-4">{checkedIds.includes(item.id) ? '✅' : '⬜'}</span>
