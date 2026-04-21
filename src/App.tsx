@@ -116,7 +116,7 @@ export default function App() {
       <header className="p-8 pt-12 flex justify-between items-end">
         <div>
           <p className="text-[#4A6741] font-bold text-[10px] tracking-widest mb-1 uppercase">May 2026</p>
-          <h1 className="text-3xl font-black">金門迎城隍 (Ver. 5)</h1>
+          <h1 className="text-3xl font-black">金門迎城隍</h1>
         </div>
         <div className="text-right">
           <span className="text-[10px] font-bold text-[#8C8579] block uppercase">Total Spent</span>
