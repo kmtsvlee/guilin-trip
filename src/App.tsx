@@ -41,7 +41,7 @@ const BottomNav = ({ onTabChange, currentTab }: any) => {
 // --- 3. 完整行程資料 (新增 Google Maps 導航連結) ---
 const scheduleData = [
   { day: "27", items: [
-    { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。", mapUrl: "https://maps.app.goo.gl/oo4x1c3xkXSv2VBZ8=金城鎮市區" },
+    { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。", mapUrl: "https://maps.app.goo.gl/oo4x1c3xkXSv2VBZ8=1&query=金城鎮市區" },
     { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落", mapUrl: "https://www.google.com/maps/search/?api=1&query=金門水頭聚落" },
     { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點", mapUrl: "https://www.google.com/maps/search/?api=1&query=翟山坑道" },
     { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像", mapUrl: "https://www.google.com/maps/search/?api=1&query=建功嶼" },
