@@ -25,7 +25,7 @@ const FlightCard = ({ type, airline, flightNo, date, time, from, to }: any) => (
 
 // --- 2. 輔助組件：底部導覽 ---
 const BottomNav = ({ onTabChange, currentTab }: any) => {
-  const tabs = [{ id: '行程', icon: '🗺️' }, { id: '預訂', icon: '🎫' }, { id: '帳單', icon: '💰' }, { id: '準備', icon: '🎒' }];
+  const tabs = [{ id: '行程', icon: '🗺️' }, { id: '航班', icon: '🎫' }, { id: '帳單', icon: '💰' }, { id: '準備', icon: '🎒' }];
   return (
     <nav className="fixed bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E5E0D8] p-3 flex justify-around items-center shadow-lg z-50">
       {tabs.map(tab => (
@@ -42,24 +42,24 @@ const BottomNav = ({ onTabChange, currentTab }: any) => {
 const scheduleData = [
   { day: "27", items: [
     { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。" },
-    { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落 [cite: 2]。" },
-    { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點 [cite: 3]。" },
-    { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像 [cite: 2]。" },
-    { time: "18:00", location: "慈堤", title: "慈堤黃昏 🌅", remark: "金門最美落日拍攝點 [cite: 2]。" },
-    { time: "20:00", location: "後浦老街", title: "後浦(金城)老街夜拍 🌙", remark: "巷弄紅燈籠與戰後建築 [cite: 2]。" }
+    { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落" },
+    { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點" },
+    { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像" },
+    { time: "18:00", location: "慈堤", title: "慈堤黃昏 🌅", remark: "金門最美落日拍攝點" },
+    { time: "20:00", location: "後浦老街", title: "後浦(金城)老街夜拍 🌙", remark: "巷弄紅燈籠與戰後建築" }
   ]},
   { day: "28", items: [
-    { time: "08:30", location: "瓊林", title: "瓊林聚落 🏮", remark: "清晨拍攝紅磚巷弄與人文圖騰 [cite: 5]。" },
-    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "行程核心：捕捉祭典與陣頭張力 [cite: 5]。" },
-    { time: "15:30", location: "南、北山", title: "南、北山聚落 🏡", remark: "人文肖像與生活細節 [cite: 5]。" },
-    { time: "17:30", location: "嚨口沙灘", title: "嚨口沙灘軌條砦 🛡️", remark: "夕陽下的軌條砦電影感大景 [cite: 5]。" },
-    { time: "19:30", location: "小金門/大橋", title: "小金門與金門大橋夜拍 🌉", remark: "壯麗大橋線條與夜景對望 [cite: 5]。" }
+    { time: "08:30", location: "瓊林", title: "瓊林聚落 🏮", remark: "清晨拍攝紅磚巷弄與人文圖騰" },
+    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "行程核心：捕捉祭典與陣頭張力" },
+    { time: "15:30", location: "南、北山", title: "南、北山聚落 🏡", remark: "人文肖像與生活細節" },
+    { time: "17:30", location: "嚨口沙灘", title: "嚨口沙灘軌條砦 🛡️", remark: "夕陽下的軌條砦電影感大景" },
+    { time: "19:30", location: "小金門/大橋", title: "小金門與金門大橋夜拍 🌉", remark: "壯麗大橋線條與夜景對望" }
   ]},
   { day: "29", items: [
-    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影 🐦", remark: "捕捉蜂虎飛行姿態與色彩 [cite: 7]。" },
-    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街 🎥", remark: "對稱建築與懷舊場景 [cite: 7]。" },
-    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街(老理髮店) 💈", remark: "沙美人文肌理肖像攝影 [cite: 7]。" },
-    { time: "19:30", location: "瓊林", title: "瓊林夜拍 🕯️", remark: "夜間聚落的古樸與低光影 [cite: 7]。" }
+    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影 🐦", remark: "捕捉蜂虎飛行姿態與色彩" },
+    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街 🎥", remark: "對稱建築與懷舊場景" },
+    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街(老理髮店) 💈", remark: "沙美人文肌理肖像攝影" },
+    { time: "19:30", location: "瓊林", title: "瓊林夜拍 🕯️", remark: "夜間聚落的古樸與低光影" }
   ]},
   { day: "30", items: [
     { time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄 🌳", remark: "湖光色影與自然紀錄 。" },
