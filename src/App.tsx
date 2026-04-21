@@ -185,7 +185,7 @@ export default function App() {
         )}
 
         {/* 預訂與準備分頁維持原樣 */}
-        {activeTab === '預訂' && (
+        {activeTab === '航班' && (
           <div>
             <FlightCard type="去程" airline="立榮航空" flightNo="B7-8801" date="2026.05.27" time="07:00 - 08:05" from="TSA" to="KNH" />
             <FlightCard type="回程" airline="立榮航空" flightNo="B7-8836" date="2026.05.30" time="20:15 - 21:15" from="KNH" to="TSA" />
