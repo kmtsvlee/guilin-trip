@@ -38,34 +38,34 @@ const BottomNav = ({ onTabChange, currentTab }: any) => {
   );
 };
 
-// --- 3. 完整行程資料  ---
+// --- 3. 完整行程資料 (依據 docx 補齊) [cite: 1-9] ---
 const scheduleData = [
   { day: "27", items: [
-    { id: "27-1", time: "08:30", location: "市區", title: "金門在地早餐", remark: "開啟味蕾。" },
-    { id: "27-2", time: "09:30", location: "水頭/珠山/歐厝", title: "古厝聚落巡禮", remark: "拍攝重點：洋樓美學、珠山與歐厝古厝群。" },
-    { id: "27-3", time: "14:00", location: "明遺/翟山", title: "備選：歷史軌跡", remark: "坑道倒影或老街古樸氛圍。" },
-    { id: "27-4", time: "15:30", location: "建功嶼/湖下", title: "建功嶼與海堤沙紋", remark: "拍攝建功嶼石像與湖下海堤沙紋理。" },
-    { id: "27-5", time: "18:00", location: "慈堤", title: "慈堤黃昏夕陽", remark: "金門最美日落拍攝點。" },
-    { id: "27-6", time: "20:00", location: "後浦老街", title: "後浦老街夜拍", remark: "拍攝紅燈籠與戰後建築煙火氣。" }
+    { time: "08:30", location: "市區", title: "金門在地早餐 🍲", remark: "建議尋找傳統廣東粥。" },
+    { time: "09:30", location: "水頭/珠山/歐厝", title: "水頭、珠山、歐厝 🏛️", remark: "拍攝洋樓美學與古厝聚落 [cite: 2]。" },
+    { time: "14:00", location: "明遺/翟山", title: "備選：明遺老街與翟山坑道 🛡️", remark: "歷史感極強的備選景點 [cite: 3]。" },
+    { time: "15:30", location: "建功嶼/湖下", title: "建功嶼與湖下海堤沙紋 🌊", remark: "捕捉海堤沙紋理與建功嶼石像 [cite: 2]。" },
+    { time: "18:00", location: "慈堤", title: "慈堤黃昏 🌅", remark: "金門最美落日拍攝點 [cite: 2]。" },
+    { time: "20:00", location: "後浦老街", title: "後浦(金城)老街夜拍 🌙", remark: "巷弄紅燈籠與戰後建築 [cite: 2]。" }
   ]},
   { day: "28", items: [
-    { id: "28-1", time: "08:30", location: "瓊林", title: "瓊林聚落巡禮", remark: "清晨光線柔和，拍紅磚巷弄。" },
-    { id: "28-2", time: "11:00", location: "金城鎮", title: "金城迎城隍盛典", remark: "本次核心！捕捉祭典陣頭張力。" },
-    { id: "28-3", time: "15:30", location: "南、北山", title: "南、北山巡禮", remark: "人文肖像與生活細節紀錄。" },
-    { id: "28-4", time: "17:30", location: "嚨口沙灘", title: "嚨口軌條砦夕照", remark: "拍出戰地電影感的前景。" },
-    { id: "28-5", time: "19:30", location: "小金門/大橋", title: "小金門與大橋夜拍", remark: "金門大橋壯麗線條與夜景。" }
+    { time: "08:30", location: "瓊林", title: "瓊林聚落 🏮", remark: "清晨拍攝紅磚巷弄與人文圖騰 [cite: 5]。" },
+    { time: "11:00", location: "金城鎮", title: "金城迎城隍 🥁", remark: "行程核心：捕捉祭典與陣頭張力 [cite: 5]。" },
+    { time: "15:30", location: "南、北山", title: "南、北山聚落 🏡", remark: "人文肖像與生活細節 [cite: 5]。" },
+    { time: "17:30", location: "嚨口沙灘", title: "嚨口沙灘軌條砦 🛡️", remark: "夕陽下的軌條砦電影感大景 [cite: 5]。" },
+    { time: "19:30", location: "小金門/大橋", title: "小金門與金門大橋夜拍 🌉", remark: "壯麗大橋線條與夜景對望 [cite: 5]。" }
   ]},
   { day: "29", items: [
-    { id: "29-1", time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影", remark: "捕捉栗喉蜂虎飛行姿態與色彩。" },
-    { id: "29-2", time: "10:00", location: "山后/陽翟", title: "山后與陽翟老街", remark: "對稱建築與懷舊場景。" },
-    { id: "29-3", time: "14:30", location: "碧山/沙美", title: "碧山與沙美老街", remark: "沙美老理髮店人文肖像紀錄。" },
-    { id: "29-4", time: "19:30", location: "瓊林", title: "瓊林夜拍", remark: "夜間聚落古樸低光影。" }
+    { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態攝影 🐦", remark: "捕捉蜂虎飛行姿態與色彩 [cite: 7]。" },
+    { time: "10:00", location: "山后/陽翟", title: "山后民俗村與陽翟老街 🎥", remark: "對稱建築與懷舊場景 [cite: 7]。" },
+    { time: "14:30", location: "碧山/沙美", title: "碧山聚落與沙美老街(老理髮店) 💈", remark: "沙美人文肌理肖像攝影 [cite: 7]。" },
+    { time: "19:30", location: "瓊林", title: "瓊林夜拍 🕯️", remark: "夜間聚落的古樸與低光影 [cite: 7]。" }
   ]},
   { day: "30", items: [
-    { id: "30-1", time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄", remark: "自然光影與湖光色影。" },
-    { id: "30-2", time: "11:00", location: "漁村坑道", title: "漁村小艇坑道 (E-092)", remark: "極致對稱與坑道光影。" },
-    { id: "30-3", time: "13:30", location: "軍事據點", title: "軍事據點探訪", remark: "尋找被遺忘的碉堡細節。" },
-    { id: "30-4", time: "15:30", location: "機場", title: "平安賦歸", remark: "結束充實的金門攝影之旅。" }
+    { time: "09:00", location: "太湖/榕園", title: "太湖與榕園紀錄 🌳", remark: "湖光色影與自然紀錄 。" },
+    { time: "11:00", location: "漁村坑道", title: "漁村小艇坑道 (E-092) ⚓", remark: "極致對稱與坑道光影 。" },
+    { time: "13:30", location: "軍事據點", title: "探訪軍事據點 🪖", remark: "尋找被遺忘的碉堡細節 。" },
+    { time: "15:30", location: "機場", title: "整理與歸途 ✈️", remark: "帶著豐富畫面結束金門攝影之旅。" }
   ]}
 ];
 
@@ -74,36 +74,25 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('行程');
   const [selectedDay, setSelectedDay] = useState('27');
   
-  // 筆記邏輯 (按景點 ID 儲存)
-  const [photoNotes, setPhotoNotes] = useState<Record<string, string>>(() => {
-    const saved = localStorage.getItem('photoNotes');
-    return saved ? JSON.parse(saved) : {};
-  });
-
   const [expenses, setExpenses] = useState<{id: number, item: string, amount: number}[]>(() => {
     const saved = localStorage.getItem('expenses');
     return saved ? JSON.parse(saved) : [];
   });
-
   const [newItem, setNewItem] = useState('');
   const [newAmount, setNewAmount] = useState('');
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editItem, setEditItem] = useState('');
   const [editAmount, setEditAmount] = useState('');
+
   const [checkedIds, setCheckedIds] = useState<number[]>(() => {
     const saved = localStorage.getItem('checkedIds');
     return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('photoNotes', JSON.stringify(photoNotes));
     localStorage.setItem('expenses', JSON.stringify(expenses));
     localStorage.setItem('checkedIds', JSON.stringify(checkedIds));
-  }, [photoNotes, expenses, checkedIds]);
-
-  const updateNote = (id: string, text: string) => {
-    setPhotoNotes(prev => ({ ...prev, [id]: text }));
-  };
+  }, [expenses, checkedIds]);
 
   const addExpense = () => {
     if (!newItem || !newAmount) return;
@@ -120,16 +109,18 @@ export default function App() {
     setEditingId(null);
   };
 
+  const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
+
   return (
-    <div className="min-h-screen bg-[#F8F5F0] pb-32 font-sans text-[#3D3A36] text-left transition-all">
+    <div className="min-h-screen bg-[#F8F5F0] pb-32 font-sans text-[#3D3A36] text-left">
       <header className="p-8 pt-12 flex justify-between items-end">
         <div>
           <p className="text-[#4A6741] font-bold text-[10px] tracking-widest mb-1 uppercase">May 2026</p>
-          <h1 className="text-3xl font-black">金門迎城隍 (Ver. 6)</h1>
+          <h1 className="text-3xl font-black">金門迎城隍</h1>
         </div>
         <div className="text-right">
           <span className="text-[10px] font-bold text-[#8C8579] block uppercase">Total Spent</span>
-          <span className="text-2xl font-black text-[#4A6741]">NT${expenses.reduce((sum, e) => sum + e.amount, 0)}</span>
+          <span className="text-2xl font-black text-[#4A6741]">NT${totalSpent}</span>
         </div>
       </header>
 
@@ -143,23 +134,11 @@ export default function App() {
                 </button>
               ))}
             </div>
-            {scheduleData.find(d => d.day === selectedDay)?.items.map((item) => (
-              <div key={item.id} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4">
+            {scheduleData.find(d => d.day === selectedDay)?.items.map((item, i) => (
+              <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4">
                 <div className="text-[#4A6741] font-bold text-xs mb-2">🕒 {item.time} 📍 {item.location}</div>
                 <h2 className="text-xl font-black mb-2 leading-tight">{item.title}</h2>
-                <div className="bg-[#F8F5F0] p-4 rounded-2xl border border-dashed border-[#8C8579]/30 text-sm italic mb-4">💡 {item.remark}</div>
-                
-                {/* 攝影筆記區塊 */}
-                <div className="pt-4 border-t border-[#E5E0D8]">
-                  <label className="text-[10px] font-black text-[#8C8579] uppercase tracking-widest mb-2 block">📷 Photo Notes (Lens/ISO/Aperture)</label>
-                  <textarea 
-                    placeholder="輸入拍攝參數或心得..."
-                    value={photoNotes[item.id] || ''}
-                    onChange={(e) => updateNote(item.id, e.target.value)}
-                    className="w-full bg-[#F8F5F0]/50 p-4 rounded-2xl text-sm font-bold border-0 focus:ring-2 focus:ring-[#4A6741] outline-none"
-                    rows={2}
-                  />
-                </div>
+                <div className="bg-[#F8F5F0] p-4 rounded-2xl border border-dashed border-[#8C8579]/30 text-sm italic">💡 {item.remark}</div>
               </div>
             ))}
           </div>
@@ -167,11 +146,11 @@ export default function App() {
 
         {activeTab === '帳單' && (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm text-left">
+            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm">
               <h3 className="font-bold text-xs text-[#8C8579] mb-4 uppercase tracking-widest">Quick Add</h3>
               <div className="flex space-x-2">
-                <input type="text" placeholder="項目" value={newItem} onChange={(e) => setNewItem(e.target.value)} className="w-full p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm outline-none" />
-                <input type="number" placeholder="$" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} className="w-24 p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm outline-none" />
+                <input type="text" placeholder="項目" value={newItem} onChange={(e) => setNewItem(e.target.value)} className="w-full p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm outline-none border-2 border-transparent focus:border-[#4A6741]" />
+                <input type="number" placeholder="$" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} className="w-24 p-4 rounded-2xl bg-[#F8F5F0] font-bold text-sm outline-none border-2 border-transparent focus:border-[#4A6741]" />
                 <button onClick={addExpense} className="p-4 bg-[#4A6741] text-white rounded-2xl font-black">＋</button>
               </div>
             </div>
@@ -186,7 +165,7 @@ export default function App() {
                     </div>
                   ) : (
                     <div className="flex justify-between items-center">
-                      <div className="flex flex-col text-left">
+                      <div className="flex flex-col">
                         <span className="font-black text-lg">{exp.item}</span>
                         <span className="text-[10px] font-bold text-[#8C8579] uppercase">Expense</span>
                       </div>
@@ -205,15 +184,15 @@ export default function App() {
           </div>
         )}
 
-        {/* 預訂與準備分頁維持穩定版 */}
+        {/* 預訂與準備分頁維持原樣 */}
         {activeTab === '預訂' && (
-          <div className="text-left">
+          <div>
             <FlightCard type="去程" airline="立榮航空" flightNo="B7-8801" date="2026.05.27" time="07:00 - 08:05" from="TSA" to="KNH" />
             <FlightCard type="回程" airline="立榮航空" flightNo="B7-8836" date="2026.05.30" time="20:15 - 21:15" from="KNH" to="TSA" />
           </div>
         )}
         {activeTab === '準備' && (
-          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] text-left shadow-sm overflow-hidden">
+          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden">
             {[ {id:1, task:"廣角鏡頭 (拍建築/夕陽)"}, {id:2, task:"長焦鏡頭 (拍栗喉蜂虎)"}, {id:3, task:"備用電池與記憶卡"}, {id:4, task:"身分證與電子機票"} ].map(item => (
               <div key={item.id} onClick={() => setCheckedIds(prev => prev.includes(item.id) ? prev.filter(i => i !== item.id) : [...prev, item.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
                 <span className="text-2xl mr-4">{checkedIds.includes(item.id) ? '✅' : '⬜'}</span>
