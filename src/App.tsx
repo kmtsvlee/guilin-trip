@@ -38,7 +38,7 @@ const BottomNav = ({ onTabChange, currentTab }: any) => {
   );
 };
 
-// --- 3. 完整行程資料 ---
+// --- 3. 完整行程資料  ---
 const scheduleData = [
   { day: "27", items: [
     { id: "27-1", time: "08:30", location: "市區", title: "金門在地早餐", remark: "開啟味蕾。" },
@@ -180,4 +180,50 @@ export default function App() {
                 <div key={exp.id} className="bg-white p-4 px-6 rounded-2xl border-2 border-[#E5E0D8] shadow-sm">
                   {editingId === exp.id ? (
                     <div className="flex items-center space-x-2">
-                      <input type="text" value={editItem} onChange={(e) => setEditItem(e.
+                      <input type="text" value={editItem} onChange={(e) => setEditItem(e.target.value)} className="flex-1 p-2 bg-[#F8F5F0] rounded-lg font-bold" />
+                      <input type="number" value={editAmount} onChange={(e) => setEditAmount(e.target.value)} className="w-20 p-2 bg-[#F8F5F0] rounded-lg font-bold" />
+                      <button onClick={saveEdit} className="text-[#4A6741] font-black p-2">💾</button>
+                    </div>
+                  ) : (
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-col text-left">
+                        <span className="font-black text-lg">{exp.item}</span>
+                        <span className="text-[10px] font-bold text-[#8C8579] uppercase">Expense</span>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <span className="font-black text-[#4A6741] text-xl">${exp.amount}</span>
+                        <div className="flex space-x-3 opacity-30 text-lg">
+                          <button onClick={() => startEdit(exp)}>📝</button>
+                          <button onClick={() => setExpenses(expenses.filter(e => e.id !== exp.id))}>✕</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 預訂與準備分頁維持穩定版 */}
+        {activeTab === '預訂' && (
+          <div className="text-left">
+            <FlightCard type="去程" airline="立榮航空" flightNo="B7-8801" date="2026.05.27" time="07:00 - 08:05" from="TSA" to="KNH" />
+            <FlightCard type="回程" airline="立榮航空" flightNo="B7-8836" date="2026.05.30" time="20:15 - 21:15" from="KNH" to="TSA" />
+          </div>
+        )}
+        {activeTab === '準備' && (
+          <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] text-left shadow-sm overflow-hidden">
+            {[ {id:1, task:"廣角鏡頭 (拍建築/夕陽)"}, {id:2, task:"長焦鏡頭 (拍栗喉蜂虎)"}, {id:3, task:"備用電池與記憶卡"}, {id:4, task:"身分證與電子機票"} ].map(item => (
+              <div key={item.id} onClick={() => setCheckedIds(prev => prev.includes(item.id) ? prev.filter(i => i !== item.id) : [...prev, item.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
+                <span className="text-2xl mr-4">{checkedIds.includes(item.id) ? '✅' : '⬜'}</span>
+                <span className={`font-bold ${checkedIds.includes(item.id) ? 'line-through opacity-30' : ''}`}>{item.task}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+      <BottomNav onTabChange={setActiveTab} currentTab={activeTab} />
+    </div>
+  );
+}
