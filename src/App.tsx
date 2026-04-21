@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-// --- 1. 組件：美食導航卡片 (修復括號與標籤閉合) [cite: 25-33] ---
+// --- 1. 組件：美食卡片 (對應美食地圖 [cite: 24-44]) ---
 const FoodCard = ({ n, t, a }: { n: string; t: string; a: string }) => (
   <div className="bg-white p-5 rounded-[2rem] border-2 border-[#E5E0D8] shadow-sm mb-4 text-left">
     <h3 className="text-lg font-black text-[#3D3A36] mb-1">{n}</h3>
@@ -19,43 +19,42 @@ const FoodCard = ({ n, t, a }: { n: string; t: string; a: string }) => (
   </div>
 );
 
-// --- 2. 資料庫：對齊文檔所有細節 [cite: 1-16] ---
+// --- 2. 資料庫：對齊文檔所有細節 [cite: 2, 4-15, 25-44] ---
 const scheduleData = [
   { day: "27", b: "標記", l: "水頭金道地", d: "東門餐廳", items: [
-    { t: "06:00", title: "集合出發 ✈️", r: "松山二航立榮櫃檯 (07:00起飛)" },
-    { t: "09:30", title: "水頭聚落攝影", r: "得月樓、金水國小、洋樓美學" },
-    { t: "14:00", title: "海際線攝影 🌊", r: "建功嶼、湖下海堤 (退潮限定)" },
-    { t: "18:00", title: "慈堤夕照", r: "捕捉金門最美日落大景" },
-    { t: "20:00", title: "老街夜拍 🌙", r: "後埔老街人文與煙火氣紀錄" }
+    { t: "07:00", title: "台北-金門 (B7-8801) ✈️", r: "06:00 松山二航立榮櫃檯集合 [cite: 2]" },
+    { t: "09:30", title: "水頭聚落攝影", r: "得月樓、金水國小、洋樓美學 [cite: 4]" },
+    { t: "14:00", title: "海際線與沙紋 🌊", r: "建功嶼、湖下海堤 (退潮限定) [cite: 4]" },
+    { t: "18:00", title: "慈堤夕照", r: "捕捉金門最美落日大景 [cite: 4]" },
+    { t: "20:00", title: "後埔老街夜拍", r: "金城老街人文與煙火氣紀錄 [cite: 4]" }
   ]},
   { day: "28", b: "民宿", l: "海口城", d: "小明的店", items: [
-    { t: "11:00", title: "金城迎城隍 🥁", r: "年度核心祭典：捕捉陣頭張力" },
-    { t: "15:30", title: "聚落生活紀錄", r: "南、北山人文肖像與生活細節" },
-    { t: "17:30", title: "嚨口戰地夕陽 🛡️", r: "軌條砦夕照 (退潮電影感拍攝)" },
-    { t: "19:30", title: "大橋/小金門夜色", r: "黑糖剉冰、雙口海邊、大橋夜拍" }
+    { t: "11:00", title: "金城迎城隍 🥁", r: "年度核心祭典：捕捉陣頭張力 [cite: 7]" },
+    { t: "15:30", title: "聚落生活紀錄", r: "南、北山人文肖像與生活細節 [cite: 7]" },
+    { t: "17:30", title: "嚨口戰地夕陽 🛡️", r: "軌條砦夕照 (退潮電影感) [cite: 7]" },
+    { t: "19:30", title: "烈嶼與大橋夜色", r: "黑糖剉冰、雙口海邊、大橋夜拍 [cite: 7]" }
   ]},
   { day: "29", b: "民宿", l: "談天樓", d: "新天地", items: [
-    { t: "06:00", title: "栗喉蜂虎攝影 🐦", r: "青年農莊 (長焦 300-400mm 必備)" },
-    { t: "10:00", title: "民俗村與老街 🎥", r: "山后對稱建築、陽翟懷舊場景" },
-    { t: "14:30", title: "人文肌理紀錄 💈", r: "碧山、沙美老理髮店肖像攝影" },
-    { t: "19:30", title: "瓊林聚落夜拍", r: "夜間光影下的古厝紅磚層次" }
+    { t: "06:00", title: "栗喉蜂虎攝影 🐦", r: "青年農莊 (長焦 300-400mm 必備) [cite: 10, 22]" },
+    { t: "10:00", title: "民俗村與老街 🎥", r: "山后對稱建築、陽翟懷舊場景 [cite: 10]" },
+    { t: "14:30", title: "人文肌理 💈", r: "碧山、沙美老理髮店人文紀錄 [cite: 10]" },
+    { t: "19:30", title: "瓊林夜拍", r: "夜間古厝紅磚光影層次 [cite: 10]" }
   ]},
   { day: "30", b: "民宿", l: "佑昇餐廳", d: "簡餐 (浯倆餐廚)", items: [
-    { t: "09:00", title: "太湖與榕園 🌳", r: "自然光影觀察與湖光紀錄" },
-    { t: "11:00", title: "漁村坑道對稱 ⚓", r: "小艇坑道 (E-092) 倒影攝影" },
-    { t: "13:30", title: "精緻洋樓美學", r: "陳景蘭洋樓、成功海邊巡禮" },
-    { t: "15:30", title: "明遺老街巡禮 ⛩️", r: "老街與舊城門歷史感紀錄" },
-    { t: "18:30", title: "歸途集合 ✈️", r: "尚義機場加油還車 (20:15起飛)" }
+    { t: "09:00", title: "湖光與自然紀錄 🌳", r: "太湖、榕園 (自然光影觀察) [cite: 13]" },
+    { t: "11:00", title: "坑道對稱美學 ⚓", r: "漁村小艇坑道 (E-092) 攝影 [cite: 13]" },
+    { t: "13:30", title: "精緻洋樓建築", r: "陳景蘭洋樓、成功海邊巡禮 [cite: 13]" },
+    { t: "15:30", title: "明遺老街巡禮 ⛩️", r: "老街與舊城門歷史感紀錄 [cite: 13]" },
+    { t: "20:15", title: "回程歸途 ✈️", r: "18:30 尚義機場加油還車 [cite: 2, 16]" }
   ]}
 ];
 
 const foodData = [
-  { n: "金道地蚵仔煎", t: "082-327969", a: "金城鎮前水頭15號" },
-  { n: "東門餐廳", t: "082-371850", a: "金城鎮東門北提路" },
-  { n: "小明的店", t: "082-327441", a: "金寧鄉湖埔村慈湖路一段98號" },
-  { n: "談天樓", t: "082-332766", a: "金湖鎮復興路3號" },
-  { n: "佑昇生億鍋貼", t: "082-332229", a: "金湖鎮成功村171號" },
-  { n: "良金牛肉麵", t: "082-335886", a: "金湖鎮漁村160號" }
+  { n: "金道地蚵仔煎", t: "082-327969", a: "金城鎮前水頭15號 [cite: 25]" },
+  { n: "東門餐廳", t: "082-371850", a: "金城鎮東門北提路 [cite: 26]" },
+  { n: "談天樓", t: "082-332766", a: "金湖鎮復興路3號 [cite: 30]" },
+  { n: "佑昇生億鍋貼", t: "082-332229", a: "成功村171號 [cite: 33]" },
+  { n: "良金牛肉麵", t: "082-335886", a: "金湖鎮漁村160號 [cite: 32]" }
 ];
 
 export default function App() {
@@ -82,8 +81,8 @@ export default function App() {
             </div>
             <div className="bg-[#4A6741] p-4 rounded-3xl text-white flex justify-around text-center shadow-lg text-[10px]">
               <div className="flex-1"><b>早</b><br/>{curr.b}</div>
-              <div className="flex-1 border-l border-white/20 px-2"><b>午</b><br/>{curr.l}</div>
-              <div className="flex-1 border-l border-white/20 px-2"><b>晚</b><br/>{curr.d}</div>
+              <div className="flex-1 border-l border-white/20 px-4"><b>午</b><br/>{curr.l}</div>
+              <div className="flex-1 border-l border-white/20 px-4"><b>晚</b><br/>{curr.d}</div>
             </div>
             {curr.items.map((it, i)=>(
               <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm mb-4">
@@ -97,7 +96,7 @@ export default function App() {
 
         {tab === '美食' && (
           <div className="space-y-4">
-            <p className="text-[10px] font-black text-[#8C8579] uppercase mb-4 tracking-widest text-left">名店導覽 [cite: 25-33]</p>
+            <p className="text-[10px] font-black text-[#8C8579] uppercase mb-4 tracking-widest text-left">金門美食名錄 [cite: 24-44]</p>
             {foodData.map((f, i)=>(<FoodCard key={i} n={f.n} t={f.t} a={f.a} />))}
           </div>
         )}
@@ -105,19 +104,19 @@ export default function App() {
         {tab === '準備' && (
           <div className="space-y-6 text-left">
             <div className="bg-[#4A6741] p-6 rounded-[2.5rem] text-white">
-              <p className="text-[10px] font-bold opacity-70 uppercase mb-3">行李托運重要規定 [cite: 23]</p>
+              <p className="text-[10px] font-bold opacity-70 uppercase mb-3">行李托運規定 [cite: 23]</p>
               <ul className="text-xs font-bold space-y-2">
-                <li>🔋 電池/行動電源：必須隨身攜帶</li>
-                <li>📸 三腳架：一定要托運 (須裝袋)</li>
-                <li>✈️ 托運限重：10 公斤 / 人</li>
+                <li>🔋 電池/行動電源：必須隨身攜帶 [cite: 23]</li>
+                <li>📸 腳架：一定要托運 (須裝袋) [cite: 23]</li>
+                <li>✈️ 托運限重：10 公斤 / 人 [cite: 23]</li>
               </ul>
             </div>
             <div className="bg-white rounded-[2.5rem] border-2 border-[#E5E0D8] shadow-sm overflow-hidden">
               {[
-                {id:1, t:"身份證正本 / 駕照 (4人)", c:"重要 [cite: 18]"},
-                {id:2, t:"300-400mm 鏡頭 (拍蜂虎)", c:"攝影 [cite: 22]"},
-                {id:3, t:"偏光 / 漸層鏡 / 三腳架", c:"攝影 [cite: 22]"},
-                {id:4, t:"自備盥洗用品 (不含一次性)", c:"生活 [cite: 20]"}
+                {id:1, t:"身份證正本 / 駕照 (4人) [cite: 18]", c:"重要"},
+                {id:2, t:"300-400mm 鏡頭 (拍蜂虎) [cite: 22]", c:"攝影"},
+                {id:3, t:"偏光鏡/漸層鏡/快門線 [cite: 22]", c:"攝影"},
+                {id:4, t:"自備盥洗用品 (民宿不供) [cite: 20]", c:"生活"}
               ].map(i=>(
                 <div key={i.id} onClick={()=>setChecked(p=>p.includes(i.id)?p.filter(x=>x!==i.id):[...p,i.id])} className="flex items-center p-6 border-b-2 border-[#F8F5F0] last:border-0">
                   <span className="text-2xl mr-4">{checked.includes(i.id)?'✅':'⬜'}</span>
