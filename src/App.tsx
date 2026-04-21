@@ -2,53 +2,56 @@ import { useState } from 'react';
 import BottomNav from './components/BottomNav';
 import FlightCard from './components/FlightCard';
 
-// 1. 金門城隍祭 4 天完整攝影行程 (每日 4 行程)
+// 1. 完整金門攝影行程：不限景點數量，依據文檔全面補齊 
 const scheduleData = [
   { 
     day: "27", 
     items: [
-      { time: "08:05", location: "金門機場", title: "解鎖金門 ✈️", remark: "取車後直奔市區，先適應金門的慢節奏。" },
-      { time: "11:30", location: "金城菜市場", title: "市場午間煙火氣 🥢", remark: "捕捉攤販忙碌身影與蒸氣，這是最有生活感的時候。" },
-      { time: "14:30", location: "模範街", title: "紅磚拱廊攝影 📸", remark: "下午光影灑在對稱拱廊，廣角鏡頭的最佳實驗場。" },
-      { time: "19:30", location: "金城老街", title: "祭典前夜巡禮 🌙", remark: "拍拍紅燈籠下的老建築，捕捉城隍祭前的寧靜張力。" }
+      { time: "08:30", location: "市區", title: "金門早餐 🍜", remark: "開啟味蕾，建議尋找在地廣東粥。" },
+      { time: "09:30", location: "水頭/珠山/歐厝", title: "三大聚落美學 🏛️", remark: "人文與建築大景，適合廣角表現聚落與層次。" },
+      { time: "13:30", location: "明遺老街/翟山坑道", title: "備選：歷史與坑道 ⚔️", remark: "若光影太強可入坑道拍攝倒影，或去明遺老街拍古樸氛圍。" },
+      { time: "15:00", location: "建功嶼/湖下海堤", title: "建功嶼與沙紋攝影 🌊", remark: "注意潮汐時間，拍攝湖下海堤獨特的沙紋紋理。" },
+      { time: "18:00", location: "慈堤", title: "慈堤黃昏夕陽 🌅", remark: "攝影師必爭之地，廣角捕捉海天一色的壯闊感。" },
+      { time: "20:00", location: "後浦(金城)老街", title: "後浦老街夜拍 🌙", remark: "夜拍重點：紅燈籠下的戰後建築與巷弄人文張力。" }
     ] 
   },
   { 
     day: "28", 
     items: [
-      { time: "09:00", location: "浯島城隍廟", title: "正日起駕儀式 🏮", remark: "城隍祭最高潮！煙火繚繞與陣頭交織，人文攝影核心。" },
-      { time: "12:00", location: "市區小巷", title: "廟會街頭小吃 🍜", remark: "拍拍吃著廣東粥的信眾，捕捉祭典中的日常片段。" },
-      { time: "14:00", location: "後浦老街", title: "神轎遶境高潮 🥁", remark: "神轎穿梭窄巷，用廣角鏡頭貼近人物情緒與動作。" },
-      { time: "21:00", location: "城隍廟口", title: "夜宴與謝神 🕯️", remark: "拍拍祭典結束後留下的燈影與殘煙，很有電影感。" }
+      { time: "08:30", location: "市區/瓊林", title: "早餐與瓊林巡禮 🏮", remark: "清晨光線柔和，適合拍攝瓊林的紅磚巷弄與人文圖騰。" },
+      { time: "11:00", location: "金城鎮", title: "正日：迎城隍盛典 🥁", remark: "本次旅程核心！廣角與長焦交替，捕捉祭典高潮、陣頭與信眾神情。" },
+      { time: "15:30", location: "南、北山聚落", title: "南北山聚落攝影 🏡", remark: "拍攝古厝的人文細節與戰鬥留下的歷史痕跡。" },
+      { time: "17:30", location: "嚨口沙灘", title: "軌條砦夕照 🛡️", remark: "利用軌條砦作為前景，拍出戰地特有的淒美電影感。" },
+      { time: "19:30", location: "小金門/金門大橋", title: "小金門探訪與大橋夜色 🌉", remark: "拍攝大橋壯麗線條與對岸光影。" }
     ] 
   },
   { 
     day: "29", 
     items: [
-      { time: "10:00", location: "水頭聚落", title: "洋樓美學攝影 🏛️", remark: "拍出得月樓的僑鄉感，注意閩南建築的脊線對稱。" },
-      { time: "13:30", location: "珠山聚落", title: "紅磚聚落全景 🧱", remark: "登上聚落後山，拍出屋脊層層疊疊的節奏感。" },
-      { time: "16:00", location: "翟山坑道", title: "坑道倒影對稱 💧", remark: "利用坑道平靜水面倒影，拍出完美的水平與垂直線。" },
-      { time: "18:30", location: "慈湖三角堡", title: "慈湖夕陽軌道 🌅", remark: "拍拍軌道倒影與夕陽，營造出戰地的荒涼淒美感。" }
+      { time: "06:00", location: "青年農莊", title: "栗喉蜂虎生態 🐦", remark: "夏季限定！長焦預備，捕捉蜂虎優美的飛行與色彩。" },
+      { time: "10:00", location: "山后民俗村/陽翟", title: "民俗建築與復古老街 🎥", remark: "山后整齊的對稱建築（廣角）、陽翟老街的懷舊感。" },
+      { time: "14:30", location: "碧山/沙美老街", title: "碧山與沙美人文 💈", remark: "尋找沙美老理髮店，捕捉最有「生活肌理」的人文肖像。" },
+      { time: "19:30", location: "瓊林聚落", title: "瓊林夜拍 🕯️", remark: "感受夜間聚落的古樸與低光影下的紅磚層次。" }
     ] 
   },
   { 
     day: "30", 
     items: [
-      { time: "08:30", location: "金城早市", title: "早晨菜市肌理 🥬", remark: "拍拍老闆搓蚵嗲的手，這就是你追求的生活細節。" },
-      { time: "10:30", location: "北山古洋樓", title: "彈孔牆人文痕跡 🏚️", remark: "廣角特寫戰鬥留下的傷痕，拍出歷史的壓迫感。" },
-      { time: "12:30", location: "在地牛肉麵", title: "最後的味覺紀錄 🐮", remark: "拍拍大口吃麵的人們，為這趟旅程畫下圓滿句點。" },
-      { time: "14:15", location: "金門機場", title: "回程與備份 ✈️", remark: "記得再次檢查記憶卡，準備回家後的大圖處理。" }
+      { time: "09:00", location: "太湖/榕園", title: "湖光色影紀錄 🌳", remark: "拍攝太湖水鳥與榕園古樸自然的光影。" },
+      { time: "11:00", location: "漁村小艇坑道", title: "坑道對稱美學 ⚓", remark: "極致的對稱構圖點，利用水面倒影創造視覺震撼。" },
+      { time: "13:30", location: "軍事據點", title: "軍事據點最後探訪 🪖", remark: "尋找被時間遺忘的碉堡細節，為攝影集畫下句點。" },
+      { time: "15:30", location: "金門機場", title: "回程與整理 ✈️", remark: "帶著充滿「煙火氣」的記憶與畫面，平安賦歸。" }
     ] 
   }
 ];
 
-// 2. 攝影師行李清單
 const initialChecklist = [
-  { id: 1, task: "廣角鏡頭 (16-35mm)", category: "器材" },
-  { id: 2, task: "備用電池與記憶卡", category: "器材" },
-  { id: 3, task: "防曬用品與雨具", category: "生活" },
-  { id: 4, task: "行動電源", category: "生活" },
-  { id: 5, task: "身分證件與電子機票", category: "重要" },
+  { id: 1, task: "廣角鏡頭 (聚落/大橋/沙紋)", category: "器材" },
+  { id: 2, task: "長焦鏡頭 (栗喉蜂虎專用)", category: "器材" },
+  { id: 3, task: "偏光鏡/減光鏡 (海堤/夕陽)", category: "器材" },
+  { id: 4, task: "備用電池與快門線", category: "器材" },
+  { id: 5, task: "防曬用品與防蚊液", category: "生活" },
+  { id: 6, task: "身分證件與電子機票", category: "重要" },
 ];
 
 export default function App() {
@@ -64,11 +67,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-paper pb-32 font-sans text-earth-dark text-left">
-      {/* 頂部標題 */}
       <header className="p-8 pt-12 flex justify-between items-end">
         <div>
-          <p className="text-leaf font-bold text-[10px] tracking-widest mb-1 uppercase text-left">May 2026</p>
-          <h1 className="text-3xl font-black text-left">金門城隍祭</h1>
+          <p className="text-leaf font-bold text-[10px] tracking-widest mb-1 uppercase">May 2026</p>
+          <h1 className="text-3xl font-black">金門迎城隍</h1>
         </div>
         <div className="text-right">
           <span className="text-[10px] font-bold text-earth-light block uppercase">Days Left</span>
@@ -76,11 +78,10 @@ export default function App() {
         </div>
       </header>
 
-      <main className="px-6 text-left">
-        {/* --- 行程分頁 --- */}
+      <main className="px-6">
         {activeTab === '行程' && (
-          <div className="space-y-6 animate-in fade-in">
-            <div className="flex space-x-3 overflow-x-auto pb-2 no-scrollbar text-center">
+          <div className="space-y-6 animate-in fade-in duration-500">
+            <div className="flex space-x-3 overflow-x-auto pb-2 no-scrollbar">
               {['27', '28', '29', '30'].map((day) => (
                 <button 
                   key={day} 
@@ -91,12 +92,12 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <div className="space-y-5">
+            <div className="space-y-4">
               {currentDayData.map((item, i) => (
                 <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-paper-dark shadow-soft">
-                  <div className="text-leaf font-bold text-xs mb-2 text-left">🕒 {item.time} 📍 {item.location}</div>
-                  <h2 className="text-xl font-black mb-3 leading-tight text-left">{item.title}</h2>
-                  <div className="bg-paper/40 p-4 rounded-2xl border border-dashed border-earth-light/30 text-sm italic leading-relaxed text-left">
+                  <div className="text-leaf font-bold text-xs mb-2">🕒 {item.time} 📍 {item.location}</div>
+                  <h2 className="text-xl font-black mb-3 leading-tight">{item.title}</h2>
+                  <div className="bg-paper/40 p-4 rounded-2xl border border-dashed border-earth-light/30 text-sm italic leading-relaxed">
                     💡 {item.remark}
                   </div>
                 </div>
@@ -105,18 +106,16 @@ export default function App() {
           </div>
         )}
 
-        {/* --- 預訂分頁 --- */}
         {activeTab === '預訂' && (
-          <div className="space-y-4 animate-in fade-in">
+          <div className="space-y-4 animate-in fade-in duration-500">
             <FlightCard type="去程" airline="立榮航空" flightNo="B7-8801" date="2026.05.27" time="07:00 - 08:05" from="TSA" to="KNH" />
             <FlightCard type="回程" airline="立榮航空" flightNo="B7-8836" date="2026.05.30" time="20:15 - 21:15" from="KNH" to="TSA" />
           </div>
         )}
 
-        {/* --- 準備分頁 --- */}
         {activeTab === '準備' && (
-          <div className="space-y-6 animate-in fade-in">
-            <h3 className="font-bold text-xs text-earth-light tracking-widest uppercase text-left">Packing Checklist</h3>
+          <div className="space-y-6 animate-in fade-in duration-500">
+            <h3 className="font-bold text-xs text-earth-light tracking-widest uppercase">Packing Checklist</h3>
             <div className="bg-white rounded-[2.5rem] border-2 border-paper-dark shadow-soft overflow-hidden">
               {initialChecklist.map((item) => (
                 <div 
@@ -125,7 +124,7 @@ export default function App() {
                   className="flex items-center p-6 border-b-2 border-paper last:border-0 active:bg-paper/30 transition-colors"
                 >
                   <span className="text-2xl mr-4">{checkedIds.includes(item.id) ? '✅' : '⬜'}</span>
-                  <div className="flex flex-col text-left">
+                  <div className="flex flex-col">
                     <span className={`font-bold ${checkedIds.includes(item.id) ? 'line-through opacity-30 text-earth-light' : ''}`}>
                       {item.task}
                     </span>
