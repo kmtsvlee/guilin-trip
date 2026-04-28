@@ -33,6 +33,13 @@ const scheduleData = [
         map: "遇龍河" 
       },
       { 
+        t: "14:00", title: "興坪古鎮 + 船遊灕江", 
+        lens: "24-105mm / 70-200mm", core: "20元人民幣背景、三岩五井十三山",
+        note: "捕捉「佳勝在興坪」的國畫意境", 
+        desc: "興坪依山傍水，風景薈萃，粉牆黛瓦石板小巷，是灕江沿岸最美麗的古鎮。灕江沿岸翠竹垂柳，倒映江中的疏林和群峰，化入天際，沉入水底。黃昏時分，五指山下宛如仙境，景色神祕。畫家徐悲鴻曾在此寫生，感嘆『果然佳勝在興坪』。",
+        map: "興坪古鎮" 
+      },
+      { 
         t: "18:00", title: "灕江漁火 (含竹筏+漁夫+魚鷹)", 
         lens: "35mm / 50mm (大光圈)", core: "藍調時刻、傳統馬燈暖色光、漁夫特寫",
         note: "【核心攝影】2小時拍攝傳統漁事景觀", 
@@ -47,10 +54,17 @@ const scheduleData = [
     items: [
       { 
         t: "05:30", title: "陽朔大橋 (拍攝日出)", 
-        lens: "70-200mm / 16-35mm", core: "江面晨霧特寫、一覽灕江水",
+        lens: "70-200mm / 16-35mm", core: "江面晨霧、一覽灕江水",
         note: "長焦捕捉霧中孤舟，廣角拍橋面延伸", 
         desc: "屹立在灕江上，橋長207米，是陽朔迄今為止最長的公路橋，連接著陽朔通往福利、興坪鄉鎮的道路。當會淩絕頂，一覽灕江水。這裡是俯瞰江面霧氣與第一道曙光的絕佳位置。",
         map: "陽朔大橋" 
+      },
+      { 
+        t: "10:00", title: "陽朔公園 + 西郎山 + 西街風情", 
+        lens: "35mm / 50mm", core: "明清建築風格、中西文化衝突人文",
+        note: "拍攝1400年歷史古街風情", 
+        desc: "西郎山可俯看城景。陽朔西街是有1400多年歷史的古老街道，位於縣城中心，全長1180米。房屋古樸典雅，桂北明清時期風格，小青瓦、坡屋面、白粉牆、吊腳樓。這裡匯集了中西文化，充滿異國風情的咖啡店、酒吧與古建築並存。",
+        map: "陽朔西街" 
       },
       { 
         t: "17:00", title: "烏龍泉 (拍攝夕陽)", 
@@ -73,10 +87,17 @@ const scheduleData = [
         map: "相公山" 
       },
       { 
+        t: "14:00", title: "黃洛瑤寨 (長髮表演)", 
+        lens: "50mm / 85mm", core: "華麗服飾紋理、長髮洗滌人文",
+        note: "拍攝「天下第一長髮村」", 
+        desc: "身著華麗服飾的瑤族姑娘表演傳統舞蹈，並獻上香味噴噴的瑤族油茶。此處可紀錄瑤族紅瑤支系的獨特民俗與人文細節。",
+        map: "黃洛瑤寨" 
+      },
+      { 
         t: "16:00", title: "龍脊平安壯寨 (九龍五虎)", 
-        lens: "70-200mm / 16-35mm", core: "梯田優美線條、高腳吊腳樓建築",
-        note: "長焦壓縮梯田層次，廣角強調規模感", 
-        desc: "龍脊梯田規模極其宏大。平安壯寨保持傳統的麻欄式三層木樓，全杉木結構，是桂北地區典型的高腳幹欄型建築。『九龍』指主脈分出來的九條小山樑，『五虎』指五個微凸的小山頭，兩者被梯田所盤繞。",
+        lens: "70-200mm / 16-35mm", core: "九龍五虎線條、高腳吊腳樓建築",
+        note: "拍攝高腳幹欄型建築與梯田", 
+        desc: "龍脊梯田規模極其宏大。平安壯寨保持傳統的麻欄式三層木樓，全杉木結構，是桂北地區典型的高腳幹欄型建築。『九龍』指主脈分出來的九條小山樑，『五虎』指五個微凸的小山頭，兩者被梯田所盤繞。z字型的石板道把全寨各戶相連。晚上可拍攝最新夜景『夜龍脊』。",
         map: "龍脊梯田" 
       }
     ]
@@ -89,14 +110,21 @@ const scheduleData = [
         t: "05:30", title: "七星伴月 (拍攝晨霧日出)", 
         lens: "24-70mm / 70-200mm", core: "七小山包對稱感、彎彎月亮田",
         note: "捕捉宛如巨龍般的梯田線條", 
-        desc: "平安梯田宛如一條進行中的巨龍。『七星』指當初開天時特意留下來的七個小山包，疊立在器塊田中央，遠望像七顆閃爍的星星，守護著龍脊那塊彎彎的月亮田。晨霧流動感極強。",
+        desc: "平安梯田宛如一條進行中的巨龍。『七星』指當初開天時特意留下來的七個小山包，疊立在器塊田中央，遠望像七顆閃爍的星星，守護著龍脊那塊彎彎的月亮田。晨霧流動感極強，是攝影精華。",
         map: "七星伴月" 
       },
       { 
+        t: "14:00", title: "日船遊一江四湖 + 日月雙塔", 
+        lens: "16-35mm", core: "城市環城水系、日塔月塔地標",
+        note: "拍攝杉湖中的金塔銀塔", 
+        desc: "環城水系包括灕江、桃花江、榕湖、杉湖等。日月雙塔座落在杉湖中，日塔為金塔，月塔為銀塔，是兩一江四湖環城水系中最重要的旅遊景點。雙塔高聳入雲，直指日月。",
+        map: "日月雙塔" 
+      },
+      { 
         t: "17:00", title: "穿山公園 + 塔山日落", 
-        lens: "70-200mm / 24-70mm", core: "古塔夕陽剪影、壽佛塔特寫",
-        note: "利用長焦捕捉塔山紅葉意境", 
-        desc: "穿山內有奇特鐘乳石岩洞。出洞後欣賞塔山上與象鼻山普賢塔遙遙相望的壽佛塔，感受山水城市的悠閒氣氛。塔山紅葉更是名列桂林八景之一。",
+        lens: "70-200mm / 24-70mm", core: "壽佛塔剪影、鐘乳石細節",
+        note: "捕捉「金針、鵝管」奇觀", 
+        desc: "穿山內有奇特鐘乳石岩洞，佈滿如樹枝狀的碳酸鈣結晶『金針』與玻璃管狀的『鵝管』。欣賞塔山上與象鼻山普賢塔遙遙相望的壽佛塔，感受山水城市的悠閒氣氛。塔山紅葉更是名列桂林八景之一。",
         map: "塔山" 
       }
     ]
@@ -106,11 +134,25 @@ const scheduleData = [
     stay: "溫暖的家", 
     items: [
       { 
+        t: "09:34", title: "桂林西-廣州南 (動車 G2231)", 
+        lens: "iPhone / 35mm", core: "車廂紀錄、告別山水",
+        note: "車次參考 09:34-11:58", 
+        desc: "結束桂林行程，搭乘高鐵返回廣州。隨後搭車返回珠海進行市區觀光。",
+        map: "桂林西站" 
+      },
+      { 
         t: "14:00", title: "珠海日月貝大劇院 + 港珠澳大橋", 
         lens: "12-24mm / 16-35mm", core: "極簡幾何線條、海島歌劇院全景",
         note: "紀錄現代建築之美", 
-        desc: "參觀愛情郵局，望港珠澳大橋。隨後參觀日月貝珠海大劇院，由一大一小兩組『貝殼』組成，是中國唯一建設在海島上的歌劇院。",
+        desc: "遠觀港珠澳大橋，這是世界最長的跨海大橋，全長55公里。隨後參觀日月貝珠海大劇院，由一大一小兩組『貝殼』組成，是中國唯一建設在海島上的歌劇院。",
         map: "珠海" 
+      },
+      { 
+        t: "20:50", title: "澳門-桃園 (星宇 JX206)", 
+        lens: "24-70mm", core: "六天影像總結、星宇體驗",
+        note: "20:50-22:40 抵達台灣", 
+        desc: "帶著滿載的美照與回憶，搭乘星宇航空返回溫暖的家。",
+        map: "澳門機場" 
       }
     ]
   }
@@ -145,12 +187,28 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F0FDF4] pb-36 font-sans text-[#064E3B] text-left">
-      <header className="p-8 pt-12 bg-gradient-to-b from-[#DCFCE7] to-[#F0FDF4]">
-        <p className="text-[#059669] font-bold text-[10px] uppercase tracking-widest">2026 June Photography Tour</p>
-        <h1 className="text-3xl font-black text-[#10B981]">桂林攝影行程</h1>
+      <header className="p-8 pt-16 bg-gradient-to-b from-[#DCFCE7] to-[#F0FDF4] flex items-center space-x-5">
+        <div className="flex-shrink-0">
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="none" className="shadow-2xl">
+            <rect width="100" height="100" rx="25" fill="#064E3B"/>
+            <path d="M15 80L40 30L65 80H15Z" fill="#10B981"/>
+            <path d="M45 80L68 45L90 80H45Z" fill="#059669" fillOpacity="0.8"/>
+            <circle cx="52" cy="62" r="14" fill="#064E3B" stroke="#F0FDF4" strokeWidth="2"/>
+            <path d="M52 48V52M66 62H62M52 76V72M38 62H42" stroke="#F0FDF4" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <p className="text-[#059669] font-bold text-[11px] uppercase tracking-[0.3em] mb-1">2026 June Expedition</p>
+          <h1 className="text-3xl font-black text-[#064E3B] tracking-tight">桂林攝影行程</h1>
+        </div>
       </header>
 
       <main className="px-6">
+        <nav className="flex space-x-4 mb-8">
+          <button onClick={() => setTab('行程')} className={`px-6 py-2 rounded-full font-black text-sm transition-all ${tab === '行程' ? 'bg-[#10B981] text-white' : 'bg-white text-[#059669] border border-[#DCFCE7]'}`}>行程</button>
+          <button onClick={() => setTab('準備')} className={`px-6 py-2 rounded-full font-black text-sm transition-all ${tab === '準備' ? 'bg-[#10B981] text-white' : 'bg-white text-[#059669] border border-[#DCFCE7]'}`}>準備</button>
+        </nav>
+
         {tab === '行程' ? (
           <>
             <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2 mb-6">
@@ -174,7 +232,6 @@ export default function App() {
                   <span className={`text-[#10B981] transition-transform duration-300 ${expandedIdx === i ? 'rotate-180' : ''}`}>▼</span>
                 </div>
                 <h2 className="text-xl font-black leading-tight text-[#064E3B]">{it.title}</h2>
-                
                 <div className={`overflow-hidden transition-all duration-300 ${expandedIdx === i ? 'max-h-[1500px] mt-4' : 'max-h-0'}`}>
                   <div className="bg-[#F0FDF4] p-5 rounded-3xl border border-dashed border-[#10B981]/30">
                     <p className="text-[#059669] text-[10px] font-black mb-3 uppercase tracking-widest border-b border-[#10B981]/20 pb-1">攝影指南</p>
@@ -199,7 +256,7 @@ export default function App() {
               </div>
             ))}
 
-            <div className="mt-8 bg-white/60 p-6 rounded-[2.5rem] border-2 border-dashed border-[#10B981]/40 flex items-center space-x-4">
+            <div className="mt-8 bg-white/60 p-6 rounded-[2.5rem] border-2 border-dashed border-[#10B981]/40 flex items-center space-x-4 shadow-sm">
               <div className="bg-[#10B981] text-white p-3 rounded-2xl text-xl">🏨</div>
               <div>
                 <p className="text-[#059669] text-[10px] font-bold uppercase tracking-wider">Tonight's Stay</p>
@@ -232,15 +289,6 @@ export default function App() {
           </div>
         )}
       </main>
-
-      <nav className="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-md rounded-[2.5rem] border-2 border-[#DCFCE7] p-2 flex justify-around shadow-xl z-50">
-        <button onClick={() => setTab('行程')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab === '行程' ? 'bg-[#10B981] text-white' : 'text-[#059669]'}`}>
-          <span className="text-lg">⛰️</span><span className="text-[8px] font-black">行程</span>
-        </button>
-        <button onClick={() => setTab('準備')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab === '準備' ? 'bg-[#10B981] text-white' : 'text-[#059669]'}`}>
-          <span className="text-lg">🎒</span><span className="text-[8px] font-black">準備</span>
-        </button>
-      </nav>
     </div>
   );
 }
