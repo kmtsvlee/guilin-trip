@@ -1,208 +1,82 @@
 import { useState } from 'react';
 
-// --- 1. 組件：美食卡片 (適應中國網路，改為複製地址) ---
 const FoodCard = ({ n, a }: { n: string; a: string }) => (
   <div className="bg-white p-5 rounded-[2rem] border-2 border-[#E2E8E4] shadow-sm mb-4 text-left">
     <h3 className="text-lg font-black text-[#2B4A3B] mb-1">{n}</h3>
     <div className="flex justify-between items-center mt-3">
       <p className="text-xs font-bold text-[#5C6B62]">📍 {a}</p>
-      <button 
-        onClick={() => navigator.clipboard.writeText(a)}
-        className="bg-[#E9EFEA] text-[#2B4A3B] px-3 py-2 rounded-xl font-black text-xs active:bg-[#2B4A3B] active:text-white transition-colors"
-      >
-        📋 複製地名
-      </button>
+      <button onClick={() => navigator.clipboard.writeText(a)} className="bg-[#E9EFEA] text-[#2B4A3B] px-3 py-2 rounded-xl font-black text-xs">📋 複製地名</button>
     </div>
   </div>
 );
 
-// --- 2. 資料庫：桂林 6 日硬核攝影行程 ---
 const scheduleData = [
   { day: "05", b: "自理", l: "珠海風味", d: "粥城風味", items: [
     { t: "08:05", title: "桃園-澳門 (星宇 JX201)", note: "10:00 抵達，過關前往珠海", map: "桃園機場" },
-    { t: "16:39", title: "廣州南-桂林西 (動車 D1862)", note: "19:30 抵達桂林", map: "廣州南站" },
-    { t: "20:30", title: "入住桂林喜來登酒店", note: "好好休息準備明日長焦激戰", map: "桂林喜來登酒店" }
+    { t: "16:39", title: "廣州南-桂林西 (動車 D1862)", note: "19:30 抵達桂林", map: "廣州南站" }
   ]},
   { day: "06", b: "酒店", l: "農家宴", d: "啤酒魚", items: [
-    { t: "09:00", title: "遇龍河三橋風光", note: "富裡橋、金龍橋、遇龍橋 (明代石橋)", map: "陽朔遇龍河" },
-    { t: "14:00", title: "興坪古鎮 / 船遊灕江", note: "青石板巷與灕江群峰倒影", map: "興坪古鎮" },
-    { t: "17:00", title: "灕江漁火 (黃昏藍調) 🌅", note: "【核心】竹筏+漁夫+魚鷹+漁火 2小時擺拍", map: "灕江" }
+    { t: "09:00", title: "遇龍河三橋風光", note: "富裡橋、金龍橋、遇龍橋攝影", map: "陽朔遇龍河" },
+    { t: "17:00", title: "灕江漁火 (藍調時刻) 🌅", note: "【核心】竹筏+漁夫+魚鷹+漁火擺拍", map: "灕江" }
   ]},
   { day: "07", b: "酒店", l: "蝴蝶莊園", d: "陽朔風味", items: [
-    { t: "05:30", title: "陽朔大橋日出 🌅", note: "當空凌絕頂，一覽灕江水", map: "陽朔大橋" },
-    { t: "10:00", title: "陽朔公園 + 西郎山", note: "桂樹成蔭，觀賞獨秀峰", map: "陽朔公園" },
-    { t: "14:00", title: "陽朔西街風情", note: "中西合璧建築，人文街拍", map: "陽朔西街" },
+    { t: "05:30", title: "陽朔大橋日出 🌅", note: "捕捉灕江晨曦", map: "陽朔大橋" },
     { t: "17:30", title: "烏龍泉夕陽 🌇", note: "黃昏夕照攝影", map: "烏龍泉" }
   ]},
   { day: "08", b: "酒店", l: "壯族風味", d: "龍勝風味", items: [
     { t: "05:30", title: "相公山日出雲海 🌅", note: "【核心】俯瞰灕江第一灣，廣角大景", map: "相公山" },
-    { t: "10:30", title: "黃洛瑤寨", note: "天下第一長髮村，瑤族人文與傳統表演", map: "黃洛瑤寨" },
-    { t: "15:00", title: "龍脊梯田 (平安壯寨)", note: "電瓶車接送，準備拍攝梯田光影", map: "龍脊梯田" },
-    { t: "17:30", title: "九龍五虎晚霞夕陽 🌇", note: "梯田水面反光與夕照", map: "龍脊梯田九龍五虎觀景台" }
+    { t: "17:30", title: "九龍五虎晚霞夕陽 🌇", note: "梯田水面反光攝影", map: "龍脊梯田" }
   ]},
   { day: "09", b: "打包", l: "竹筒飯", d: "九龍酒家", items: [
-    { t: "06:00", title: "七星伴月晨霧日出 🌅", note: "龍脊平安壯寨梯田1號點，拍攝晨霧", map: "龍脊梯田七星伴月" },
-    { t: "14:00", title: "一江四湖 / 日月雙塔", note: "外觀日月雙塔，唐代城護城河風光", map: "桂林日月雙塔" },
-    { t: "17:00", title: "塔山夕陽 🌇", note: "進塔山拍攝晚霞夕照", map: "穿山公園塔山" },
-    { t: "19:30", title: "兩江四湖沿岸夜景 🌌", note: "車遊拍攝桂林市中心美麗燈光秀", map: "桂林兩江四湖" }
+    { t: "06:00", title: "七星伴月晨霧日出 🌅", note: "龍脊平安壯寨梯田攝影", map: "龍脊梯田" },
+    { t: "19:30", title: "兩江四湖夜景 🌌", note: "燈光秀攝影", map: "兩江四湖" }
   ]},
   { day: "10", b: "打包", l: "四合院", d: "自理", items: [
-    { t: "09:34", title: "桂林西-廣州南 (動車 G2231)", note: "11:58 抵達廣州南，轉車回珠海", map: "桂林西站" },
-    { t: "14:30", title: "愛情郵局 / 城市陽臺", note: "遠眺港珠澳大橋，海濱人文風景", map: "珠海愛情郵局" },
-    { t: "16:00", title: "日月貝大劇院 (外觀)", note: "中國唯一海島歌劇院，建築幾何攝影", map: "珠海大劇院" },
-    { t: "20:50", title: "澳門-桃園 (星宇 JX206) ✈️", note: "22:40 抵達，滿載光影回歸", map: "澳門機場" }
+    { t: "14:30", title: "愛情郵局 / 城市陽臺", note: "遠眺港珠澳大橋", map: "珠海愛情郵局" },
+    { t: "16:00", title: "日月貝大劇院 (外觀)", note: "建築幾何攝影", map: "珠海大劇院" },
+    { t: "20:50", title: "澳門-桃園 (星宇 JX206)", note: "22:40 抵達家園", map: "澳門機場" }
   ]}
-];
-
-// 住宿資料
-const hotelData: Record<string, { n: string, a: string }> = {
-  "05": { n: "桂林喜來登酒店 (或同級)", a: "桂林市" },
-  "06": { n: "新西街麗呈華廷酒店", a: "陽朔縣" },
-  "07": { n: "相公山山莊 (或 DS.裏度度假)", a: "陽朔相公山" },
-  "08": { n: "林舍民宿 (或同級)", a: "龍脊九龍五虎觀景台" },
-  "09": { n: "桂林喜來登酒店 (或同級)", a: "桂林市" }
-};
-
-const foodData = [
-  { n: "珠海風味", a: "Day 1 中餐" },
-  { n: "粥城風味", a: "Day 1 晚餐" },
-  { n: "農家宴", a: "Day 2 中餐" },
-  { n: "陽朔啤酒魚", a: "Day 2 晚餐" },
-  { n: "蝴蝶莊園", a: "Day 3 中餐" },
-  { n: "陽朔風味", a: "Day 3 晚餐" },
-  { n: "壯族風味", a: "Day 4 中餐" },
-  { n: "龍勝風味", a: "Day 4 晚餐" },
-  { n: "竹筒飯", a: "Day 5 中餐" },
-  { n: "九龍酒家", a: "Day 5 晚餐" },
-  { n: "珠海四合院", a: "Day 6 中餐" }
 ];
 
 export default function App() {
   const [tab, setTab] = useState('行程');
   const [day, setDay] = useState('05');
-  const [expenses, setExpenses] = useState<{id:number, i:string, a:number}[]>([]);
-  const [inI, setInI] = useState('');
-  const [inA, setInA] = useState('');
-  
   const curr = scheduleData.find(d => d.day === day) || scheduleData[0];
-  const hotel = hotelData[day];
 
   return (
     <div className="min-h-screen bg-[#F5F7F6] pb-36 font-sans text-[#2B4A3B] text-left">
-      <header className="p-8 pt-12 flex justify-between items-end bg-gradient-to-b from-[#E2E8E4] to-[#F5F7F6]">
-        <div>
-          <p className="text-[#5C6B62] font-bold text-[10px] uppercase">Jun 2026</p>
-          <h1 className="text-3xl font-black">桂林攝影手帳</h1>
-        </div>
-        {tab === '帳單' && (
-          <div className="text-right">
-            <span className="text-[10px] font-bold text-[#5C6B62] uppercase block">總支出</span>
-            <span className="text-2xl font-black text-[#2B4A3B]">NT${expenses.reduce((s,e)=>s+e.a,0)}</span>
-          </div>
-        )}
+      <header className="p-8 pt-12 bg-gradient-to-b from-[#E2E8E4] to-[#F5F7F6]">
+        <p className="text-[#5C6B62] font-bold text-[10px] uppercase tracking-widest">June 2026</p>
+        <h1 className="text-3xl font-black">桂林攝影手帳</h1>
       </header>
-
-      <main className="px-6 text-left">
-        {tab === '行程' && (
-          <div className="space-y-6">
-            <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2">
-              {['05','06','07','08','09','10'].map(d=>(
-                <button key={d} onClick={()=>setDay(d)} className={`flex-1 min-w-[50px] py-4 rounded-2xl border-2 transition-all ${day===d?'bg-white border-[#2B4A3B] shadow-sm':'opacity-50 border-[#E2E8E4]'}`}>
-                  <span className="text-lg font-black">{d}</span>
-                </button>
-              ))}
-            </div>
-            
-            <div className="bg-[#2B4A3B] p-4 rounded-3xl text-white flex justify-around text-center shadow-lg text-[10px]">
-              <div className="flex-1"><b>早</b><br/>{curr.b}</div>
-              <div className="flex-1 border-l border-white/20 px-2"><b>午</b><br/>{curr.l}</div>
-              <div className="flex-1 border-l border-white/20 px-2"><b>晚</b><br/>{curr.d}</div>
-            </div>
-
-            {curr.items.map((it, i)=>(
-              <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm mb-4">
-                <div className="flex justify-between items-start mb-2">
-                  <p className="text-[#2B4A3B] font-bold text-xs bg-[#E9EFEA] px-2 py-1 rounded-lg">🕒 {it.t}</p>
-                  <button onClick={() => navigator.clipboard.writeText(it.map)} className="text-[#5C6B62] text-[10px] font-bold border border-[#E2E8E4] px-2 py-1 rounded-lg">📋 {it.map}</button>
-                </div>
-                <h2 className="text-xl font-black leading-tight mb-2 text-left">{it.title}</h2>
-                <div className="bg-[#F5F7F6] p-4 rounded-2xl border border-dashed border-[#5C6B62]/30 text-sm italic text-left">💡 {it.note}</div>
-              </div>
-            ))}
-
-            {hotel && (
-              <div className="mt-12 pt-8 border-t-2 border-dashed border-[#E2E8E4]">
-                <p className="text-[10px] font-black text-[#5C6B62] uppercase text-center mb-4 tracking-widest">今晚下榻</p>
-                <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#2B4A3B] shadow-sm text-left">
-                  <h3 className="text-lg font-black mb-1">🏠 {hotel.n}</h3>
-                  <p className="text-xs font-bold text-[#5C6B62]">📍 {hotel.a}</p>
-                </div>
-              </div>
-            )}
+      <main className="px-6">
+        <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2 mb-6">
+          {['05','06','07','08','09','10'].map(d=>(
+            <button key={d} onClick={()=>setDay(d)} className={`flex-1 min-w-[50px] py-4 rounded-2xl border-2 transition-all ${day===d?'bg-white border-[#2B4A3B] shadow-sm':'opacity-40 border-[#E2E8E4]'}`}>
+              <span className="text-lg font-black">{d}</span>
+            </button>
+          ))}
+        </div>
+        <div className="bg-[#2B4A3B] p-4 rounded-3xl text-white flex justify-around text-center text-[10px] mb-6">
+          <div className="flex-1"><b>早</b><br/>{curr.b}</div>
+          <div className="flex-1 border-l border-white/20 px-2"><b>午</b><br/>{curr.l}</div>
+          <div className="flex-1 border-l border-white/20 px-2"><b>晚</b><br/>{curr.d}</div>
+        </div>
+        {curr.items.map((it, i)=>(
+          <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm mb-4">
+            <p className="text-[#2B4A3B] font-bold text-xs bg-[#E9EFEA] px-2 py-1 rounded-lg inline-block mb-2">🕒 {it.t}</p>
+            <h2 className="text-xl font-black leading-tight mb-2">{it.title}</h2>
+            <div className="bg-[#F5F7F6] p-4 rounded-2xl border border-dashed border-[#5C6B62]/30 text-sm italic">💡 {it.note}</div>
           </div>
-        )}
-
-        {tab === '交通' && (
-          <div className="space-y-4 text-left">
-            <h2 className="text-[10px] font-black text-[#5C6B62] uppercase tracking-widest mb-2">✈️ 航班資訊</h2>
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm">
-              <span className="bg-[#E9EFEA] text-[#2B4A3B] px-3 py-1 rounded-full text-[10px] font-black uppercase mb-4 inline-block">去程 6/05</span>
-              <p className="text-xl font-black">星宇航空 JX201</p>
-              <p className="text-sm font-bold text-[#5C6B62]">08:05 桃園起飛 / 10:00 抵達澳門</p>
-            </div>
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm">
-              <span className="bg-[#E9EFEA] text-[#2B4A3B] px-3 py-1 rounded-full text-[10px] font-black uppercase mb-4 inline-block">回程 6/10</span>
-              <p className="text-xl font-black">星宇航空 JX206</p>
-              <p className="text-sm font-bold text-[#5C6B62]">20:50 澳門起飛 / 22:40 抵達桃園</p>
-            </div>
-
-            <h2 className="text-[10px] font-black text-[#5C6B62] uppercase tracking-widest mb-2 mt-8">🚄 高鐵動車</h2>
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm">
-              <span className="bg-[#E9EFEA] text-[#2B4A3B] px-3 py-1 rounded-full text-[10px] font-black uppercase mb-4 inline-block">Day 1</span>
-              <p className="text-xl font-black">廣州南 ➔ 桂林西 (D1862)</p>
-              <p className="text-sm font-bold text-[#5C6B62]">16:39 發車 / 19:30 抵達</p>
-            </div>
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm">
-              <span className="bg-[#E9EFEA] text-[#2B4A3B] px-3 py-1 rounded-full text-[10px] font-black uppercase mb-4 inline-block">Day 6</span>
-              <p className="text-xl font-black">桂林西 ➔ 廣州南 (G2231)</p>
-              <p className="text-sm font-bold text-[#5C6B62]">09:34 發車 / 11:58 抵達</p>
-            </div>
-          </div>
-        )}
-
-        {tab === '美食' && (
-          <div className="space-y-4">
-            <p className="text-[10px] font-black text-[#5C6B62] uppercase mb-4 tracking-widest text-left">桂林/陽朔/龍勝 風味餐</p>
-            {foodData.map((f, i)=>(<FoodCard key={i} n={f.n} a={f.a} />))}
-          </div>
-        )}
-
-        {tab === '帳單' && (
-          <div className="space-y-4 text-left">
-            <div className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm">
-              <div className="flex space-x-2">
-                <input type="text" placeholder="項目" value={inI} onChange={(e)=>setInI(e.target.value)} className="flex-1 p-4 rounded-2xl bg-[#F5F7F6] font-bold text-sm outline-none" />
-                <input type="number" placeholder="¥ / NT$" value={inA} onChange={(e)=>setInA(e.target.value)} className="w-24 p-4 rounded-2xl bg-[#F5F7F6] font-bold text-sm outline-none" />
-                <button onClick={()=>{
-                  if(inI && inA){ setExpenses([{id:Date.now(), i:inI, a:Number(inA)}, ...expenses]); setInI(''); setInA(''); }
-                }} className="p-4 bg-[#2B4A3B] text-white rounded-2xl font-black">＋</button>
-              </div>
-            </div>
-            {expenses.map(e=>(
-              <div key={e.id} className="bg-white p-4 px-6 rounded-2xl border-2 border-[#E2E8E4] flex justify-between items-center shadow-sm">
-                <span className="font-black">{e.i}</span><span className="font-black text-[#2B4A3B]">${e.a}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
-
-      <nav className="fixed bottom-6 left-4 right-4 bg-white/95 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E2E8E4] p-2 flex justify-around items-center shadow-lg z-50">
-        {[{id:'行程', i:'⛰️'}, {id:'交通', i:'🚄'}, {id:'美食', i:'🍜'}, {id:'帳單', i:'💰'}].map(t => (
-          <button key={t.id} onClick={()=>setTab(t.id)} className={`flex flex-col items-center p-2 px-3 rounded-2xl transition-all ${tab===t.id?'bg-[#2B4A3B] text-white shadow-md':'text-[#5C6B62]'}`}>
-            <span className="text-lg">{t.i}</span><span className="text-[8px] font-black">{t.id}</span>
-          </button>
         ))}
+      </main>
+      <nav className="fixed bottom-6 left-4 right-4 bg-white/95 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E2E8E4] p-2 flex justify-around shadow-lg z-50">
+        <button onClick={()=>setTab('行程')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl ${tab==='行程'?'bg-[#2B4A3B] text-white':'text-[#5C6B62]'}`}>
+          <span className="text-lg">⛰️</span><span className="text-[8px] font-black">行程</span>
+        </button>
+        <button onClick={()=>setTab('美食')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl ${tab==='美食'?'bg-[#2B4A3B] text-white':'text-[#5C6B62]'}`}>
+          <span className="text-lg">🍜</span><span className="text-[8px] font-black">美食</span>
+        </button>
       </nav>
     </div>
   );
