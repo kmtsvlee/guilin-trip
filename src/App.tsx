@@ -33,37 +33,54 @@ export default function App() {
   const curr = scheduleData.find(d => d.day === day) || scheduleData[0];
 
   return (
-    <div className="min-h-screen bg-[#F5F7F6] pb-36 font-sans text-[#2B4A3B] text-left">
-      <header className="p-8 pt-12 bg-gradient-to-b from-[#E2E8E4] to-[#F5F7F6]">
-        <p className="text-[#5C6B62] font-bold text-[10px] uppercase tracking-widest">June 2026</p>
+    <div className="min-h-screen bg-[#F0FDF4] pb-36 font-sans text-[#064E3B] text-left">
+      {/* Header: 改為翠綠漸層 */}
+      <header className="p-8 pt-12 bg-gradient-to-b from-[#DCFCE7] to-[#F0FDF4]">
+        <p className="text-[#059669] font-bold text-[10px] uppercase tracking-widest">June 2026</p>
         <h1 className="text-3xl font-black">桂林攝影手帳</h1>
       </header>
+
       <main className="px-6">
+        {/* 日期選擇器: 選中時變為翠綠色 */}
         <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2 mb-6">
           {['05','06','07','08','09','10'].map(d=>(
-            <button key={d} onClick={()=>setDay(d)} className={`flex-1 min-w-[50px] py-4 rounded-2xl border-2 transition-all ${day===d?'bg-white border-[#2B4A3B] shadow-sm':'opacity-40 border-[#E2E8E4]'}`}>
+            <button 
+              key={d} 
+              onClick={()=>setDay(d)} 
+              className={`flex-1 min-w-[50px] py-4 rounded-2xl border-2 transition-all ${day===d?'bg-[#10B981] border-[#10B981] text-white shadow-md':'bg-white border-[#DCFCE7] text-[#059669] opacity-70'}`}
+            >
               <span className="text-lg font-black">{d}</span>
             </button>
           ))}
         </div>
-        <div className="bg-[#2B4A3B] p-4 rounded-3xl text-white flex justify-around text-center text-[10px] mb-6">
+
+        {/* 飲食資訊: 背景改為深翠綠 */}
+        <div className="bg-[#064E3B] p-5 rounded-3xl text-[#D1FAE5] flex justify-around text-center text-[10px] mb-8 shadow-lg">
           <div className="flex-1"><b>早</b><br/>{curr.b}</div>
-          <div className="flex-1 border-l border-white/20 px-2"><b>午</b><br/>{curr.l}</div>
-          <div className="flex-1 border-l border-white/20 px-2"><b>晚</b><br/>{curr.d}</div>
+          <div className="flex-1 border-l border-emerald-800/50 px-2"><b>午</b><br/>{curr.l}</div>
+          <div className="flex-1 border-l border-emerald-800/50 px-2"><b>晚</b><br/>{curr.d}</div>
         </div>
+
+        {/* 行程卡片 */}
         {curr.items.map((it, i)=>(
-          <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#E2E8E4] shadow-sm mb-4">
-            <p className="text-[#2B4A3B] font-bold text-xs bg-[#E9EFEA] px-2 py-1 rounded-lg inline-block mb-2">🕒 {it.t}</p>
-            <h2 className="text-xl font-black leading-tight mb-2">{it.title}</h2>
-            <div className="bg-[#F5F7F6] p-4 rounded-2xl border border-dashed border-[#5C6B62]/30 text-sm italic">💡 {it.note}</div>
+          <div key={i} className="bg-white p-6 rounded-[2.5rem] border-2 border-[#DCFCE7] shadow-sm mb-5">
+            <div className="flex items-center mb-3">
+              <span className="text-[#059669] font-bold text-xs bg-[#D1FAE5] px-3 py-1 rounded-full">🕒 {it.t}</span>
+            </div>
+            <h2 className="text-xl font-black leading-tight mb-2 text-[#064E3B]">{it.title}</h2>
+            <div className="bg-[#F0FDF4] p-4 rounded-2xl border border-dashed border-[#10B981]/30 text-sm italic text-[#059669]">
+              💡 {it.note}
+            </div>
           </div>
         ))}
       </main>
-      <nav className="fixed bottom-6 left-4 right-4 bg-white/95 backdrop-blur-md rounded-[2.5rem] border-2 border-[#E2E8E4] p-2 flex justify-around shadow-lg z-50">
-        <button onClick={()=>setTab('行程')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl ${tab==='行程'?'bg-[#2B4A3B] text-white':'text-[#5C6B62]'}`}>
+
+      {/* 底部導覽欄: 選中狀態改為翠綠 */}
+      <nav className="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-md rounded-[2.5rem] border-2 border-[#DCFCE7] p-2 flex justify-around shadow-xl z-50">
+        <button onClick={()=>setTab('行程')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab==='行程'?'bg-[#10B981] text-white shadow-inner':'text-[#059669]'}`}>
           <span className="text-lg">⛰️</span><span className="text-[8px] font-black">行程</span>
         </button>
-        <button onClick={()=>setTab('美食')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl ${tab==='美食'?'bg-[#2B4A3B] text-white':'text-[#5C6B62]'}`}>
+        <button onClick={()=>setTab('美食')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab==='美食'?'bg-[#10B981] text-white shadow-inner':'text-[#059669]'}`}>
           <span className="text-lg">🍜</span><span className="text-[8px] font-black">美食</span>
         </button>
       </nav>
