@@ -7,14 +7,16 @@ const scheduleData = [
     items: [
       { 
         t: "08:05", title: "桃園-澳門 (星宇 JX201)", 
-        note: "抵達後過關前往珠海", 
-        desc: "今日於機場集合搭機前往澳門。抵達後過關前往珠海。午餐後前往廣州高鐵站搭乘高速列車前往『山水甲天下』之美譽的桂林。桂林是中國河山中的一顆璀璨明珠，獨特的喀斯特地貌和秀美的灕江使這裡成為舉世聞名的旅遊勝地。『山青、水秀、洞奇、石美』形成了桂林獨具一格、馳名中外的自然風光。",
+        lens: "24-70mm", core: "機窗窗景、澳門過關紀錄",
+        note: "高空俯瞰雲海與海島線條", 
+        desc: "開啟六天五夜桂林攝影之旅。抵達澳門後過關前往珠海。午後轉往廣州搭乘動車，沿途觀察地理特徵由平原轉為丘陵孤峰。",
         map: "桃園機場" 
       },
       { 
         t: "16:39", title: "廣州南-桂林西 (動車 D1862)", 
-        note: "車次參考 16:39-19:30", 
-        desc: "搭乘動車前往桂林西站。建議在車窗邊準備相機，進入廣西境內後，窗外的山勢將開始展現喀斯特地貌的奇特輪廓。",
+        lens: "35mm / 50mm", core: "車廂人文、窗外地景流動",
+        note: "快門優先捕捉窗外地貌變化", 
+        desc: "搭乘動車前往桂林。窗外山勢將開始展現喀斯特地貌的奇特輪廓。適合練習動態構圖。",
         map: "廣州南站" 
       }
     ]
@@ -25,20 +27,23 @@ const scheduleData = [
     items: [
       { 
         t: "09:00", title: "遇龍河三橋 (富裡、金龍、遇龍)", 
-        note: "歷史古橋與平靜水面攝影", 
-        desc: "遇龍河位於陽朔縣，常年水質清澈，水流緩慢。富裡橋建於明代永樂年間，石結構拱橋與倒影相接，酷似一輪滿月。遇龍橋則是石拱橋，始建於明代，橋長60米，是陽朔縣重點文物古蹟。建議使用廣角捕捉古橋與兩岸翠竹、農田構成的南國風光。",
+        lens: "16-35mm (超廣角)", core: "古橋對稱倒影、兩岸垂柳煙火氣",
+        note: "利用低角度強調拱橋弧線", 
+        desc: "遇龍河水質清澈。富裡橋建於明代，石結構拱橋與倒影相接酷似滿月。建議觀察橋頭居民洗滌或過橋的人影，增添生活感。",
         map: "遇龍河" 
       },
       { 
         t: "14:00", title: "興坪古鎮 + 船遊灕江", 
-        note: "捕捉「三岩、五井、十三山」", 
-        desc: "興坪依山傍水，風景薈萃，粉牆黛瓦石板小巷，是灕江沿岸最美麗的古鎮。灕江沿岸翠竹垂柳，倒映江中的疏林和群峰，化入天際，沉入水底。黃昏時分，五指山下宛如仙境，景色神祕。畫家徐悲鴻曾在此寫生，感嘆『果然佳勝在興坪』。",
+        lens: "24-105mm (全能焦段)", core: "20元人民幣背景、江岸疏林群峰",
+        note: "長焦段壓縮群峰重疊感", 
+        desc: "興坪依山傍水，粉牆黛瓦。灕江沿岸翠竹垂柳，化入天際。黃昏時分五指山下宛如仙境，是徐悲鴻寫生之地。",
         map: "興坪古鎮" 
       },
       { 
         t: "18:00", title: "灕江漁火 (含竹筏+漁夫+魚鷹)", 
-        note: "【核心攝影】藍調時刻與傳統漁燈", 
-        desc: "這是灕江漁家人的傳統漁事活動。在清晨或傍晚，小竹筏上一盞耀眼的燈光，魚鷹借著燈光捕魚。夜幕下的江面，漁民成群結隊，乘筏遊梭，灕江山水大背景融合成一幅令人嘆為觀止的奇妙景觀。",
+        lens: "35mm / 50mm (大光圈)", core: "傳統馬燈暖光、魚鷹動態、藍調背景",
+        note: "【核心】控制冷暖平衡，捕捉漁火微光", 
+        desc: "灕江傳統漁事。夜幕下漁民點亮馬燈，魚鷹借光捕魚。這是最考驗高感光與測光能力的經典場景。",
         map: "灕江" 
       }
     ]
@@ -49,20 +54,23 @@ const scheduleData = [
     items: [
       { 
         t: "05:30", title: "陽朔大橋 (拍攝日出)", 
-        note: "捕捉灕江第一長公路橋晨曦", 
-        desc: "屹立在灕江上，橋長207米，是陽朔迄今為止最長的公路橋。當會淩絕頂，一覽灕江水。這裡是俯瞰江面霧氣與第一道曙光的絕佳位置。",
+        lens: "16-35mm / 70-200mm", core: "江面晨霧、第一道曙光穿透感",
+        note: "長焦捕捉霧中孤舟，廣角拍橋面延伸", 
+        desc: "陽朔迄今最長公路橋。這裡是俯瞰江面霧氣與日出光影的最佳機位。",
         map: "陽朔大橋" 
       },
       { 
-        t: "10:00", title: "陽朔公園 + 西郎山 + 西街風情", 
-        note: "古建築與現代異國風情融合", 
-        desc: "陽朔公園內的西郎山可俯看城景。陽朔西街是有1400多年歷史的古老街道，明清時期的風格，青瓦粉牆吊腳樓。這裡匯集了中西文化，充滿異國風情的咖啡店、酒吧與古樸建築交織，形成獨特的旅遊景點資源。",
+        t: "10:00", title: "陽朔西街風情", 
+        lens: "35mm (人文定焦)", core: "明清建築吊腳樓、中西文化衝突點",
+        note: "捕捉古街生活片段與招牌色彩", 
+        desc: "1400年歷史古街。青瓦粉牆與現代酒吧並存，充滿異國風情，是街頭人文攝影的寶庫。",
         map: "陽朔西街" 
       },
       { 
         t: "17:00", title: "烏龍泉 (拍攝夕陽)", 
-        note: "捕捉田園風光與落日餘暉", 
-        desc: "烏龍泉是拍攝田園風光的秘境。夕陽照射在水田與孤峰之間，線條優美，是典型的桂林山水攝影機位。",
+        lens: "16-35mm / 24-70mm", core: "水田幾何線條、夕陽餘暉反射",
+        note: "尋找水田反光最亮的夾角進行構圖", 
+        desc: "典型的桂林田園秘境。夕陽照射在水田與孤峰間，線條極美。",
         map: "烏龍泉" 
       }
     ]
@@ -73,20 +81,23 @@ const scheduleData = [
     items: [
       { 
         t: "05:00", title: "相公山 (拍攝日出雲海)", 
-        note: "【核心重點】俯看灕江第一灣", 
-        desc: "位於陽朔興坪鎮內的灕江西岸。登上相公山舉目遠眺，群峰排列有序，蜿蜒流淌的灕江甚是美妙。這裡的雲海、日出、光影、彩霞吸引著無數攝影愛好者和攝影家。",
+        lens: "16-35mm (超廣角必備)", core: "灕江第一灣全景、群峰排列張力",
+        note: "【核心】使用漸變鏡或包圍曝光控制天空亮度", 
+        desc: "登上山頂俯瞰。雲海、日出、光影共同構成如國畫般的意境，是桂林最頂級的攝影機位。",
         map: "相公山" 
       },
       { 
         t: "14:00", title: "黃洛瑤寨 (長髮表演)", 
-        note: "紀錄天下第一長髮村的人文細節", 
-        desc: "黃洛瑤寨身著華麗服飾的瑤族姑娘表演傳統舞蹈，並獻上香味噴噴的瑤族油茶。此處可觀察並拍攝瑤族獨特的服飾紋樣與生活習俗。",
+        lens: "50mm / 85mm (人像)", core: "服飾紋樣、長髮洗滌動態、神態特寫",
+        note: "利用自然光強調織物紋理", 
+        desc: "天下第一長髮村。瑤族姑娘服飾精美，可拍攝其特有的民俗勞作與傳統舞蹈。",
         map: "黃洛瑤寨" 
       },
       { 
-        t: "16:00", title: "龍脊平安壯寨梯田 (九龍五虎)", 
-        note: "拍攝氣勢磅礡的梯田線條與吊腳樓", 
-        desc: "龍脊梯田規模宏大。平安壯寨保持傳統的麻欄式三層木樓，全杉木結構，是桂北地區典型的高腳幹欄型建築。『九龍』指主脈分出來的九條小山樑，『五虎』指五個微凸的小山頭，兩者被梯田所盤繞。晚上可拍攝最新夜景『夜龍脊』。",
+        t: "16:00", title: "龍脊平安壯寨 (九龍五虎)", 
+        lens: "16-35mm / 70-200mm", core: "梯田優美線條、高腳吊腳樓建築",
+        note: "長焦壓縮梯田層次，廣角強調規模感", 
+        desc: "壯寨全杉木麻欄式三層木樓。九龍五虎意指被梯田盤繞的山樑山頭，意境深遠。",
         map: "龍脊梯田" 
       }
     ]
@@ -97,20 +108,23 @@ const scheduleData = [
     items: [
       { 
         t: "05:30", title: "七星伴月 (拍攝晨霧日出)", 
-        note: "捕捉七小山包與月亮田光影", 
-        desc: "『七星』指當初開天時特意留下來的七個小山包，疊立在器塊田中央，遠望像七顆閃爍的星星，守護著龍脊那塊彎彎的月亮田。此處晨霧流動感極強，是梯田攝影的精華。",
+        lens: "24-70mm", core: "七小山包對稱感、彎彎月亮田影",
+        note: "晨霧流動時使用慢快門增加仙氣", 
+        desc: "龍脊攝影精華。晨霧如同守護星星與月亮田，光影變幻極快。",
         map: "七星伴月" 
       },
       { 
-        t: "14:00", title: "日船遊一江四湖 + 榕杉湖 + 日月雙塔", 
-        note: "城市環城水系與地標建築", 
-        desc: "環城水系包括灕江、桃花江、榕湖、杉湖等。新橋景趣相容，樓亭臺榭錯落有致。日月雙塔座落在杉湖中，日塔為金塔，月塔為銀塔，是桂林的文化地標。",
+        t: "14:00", title: "日月雙塔 (杉湖)", 
+        lens: "16-35mm / 24-70mm", core: "金塔銀塔倒影、城市環城水系",
+        note: "尋找水面平靜處拍攝完美倒影", 
+        desc: "杉湖中的文化地標。新橋與樓亭臺榭錯落，呈現現代與古典交織的城市風光。",
         map: "日月雙塔" 
       },
       { 
         t: "17:00", title: "穿山公園 + 塔山日落", 
-        note: "捕捉「金針、鵝管」與壽佛塔剪影", 
-        desc: "穿山內有鐘乳石奇洞，佈滿如樹枝狀的碳酸鈣結晶『金針』與玻璃管狀的『鵝管』。欣賞塔山上與象鼻山普賢塔遙遙相望的壽佛塔，感受桂林山水城市的悠閒氣氛。",
+        lens: "24-70mm / 70-200mm", core: "古塔夕陽剪影、石雕細節",
+        note: "利用遠處壽佛塔作為視覺重心", 
+        desc: "穿山奇洞內有金針鵝管結晶。塔山日落時與普賢塔遙遙相望，極具悠閒感。",
         map: "塔山" 
       }
     ]
@@ -120,16 +134,11 @@ const scheduleData = [
     stay: "溫暖的家", 
     items: [
       { 
-        t: "14:00", title: "珠海觀光 (日月貝/港珠澳大橋)", 
-        note: "現代建築與海景攝影", 
-        desc: "參觀愛情郵局，望港珠澳大橋，這是世界最長的跨海大橋，全長55公里。隨後參觀日月貝珠海大劇院，由一大一小兩組『貝殼』組成，是中國唯一建設在海島上的歌劇院。",
+        t: "14:00", title: "珠海日月貝大劇院", 
+        lens: "12-24mm / 16-35mm", core: "極簡幾何線條、海島歌劇院全景",
+        note: "黑白構圖可強化建築結構感", 
+        desc: "一大一小兩組貝殼組成。中國唯一建設在海島上的歌劇院，現代感十足。",
         map: "珠海" 
-      },
-      { 
-        t: "20:50", title: "澳門-桃園 (星宇 JX206)", 
-        note: "20:50-22:40 抵達台灣", 
-        desc: "帶著滿載的美照與回憶，搭乘星宇航空返回溫暖的家。",
-        map: "澳門機場" 
       }
     ]
   }
@@ -137,19 +146,14 @@ const scheduleData = [
 
 const prepList = [
   { category: "攝影器材", items: [
-    { name: "廣角鏡頭 (16-35mm)", detail: "必備！拍梯田大景與古橋全景" },
-    { name: "三腳架", detail: "灕江漁火、相公山雲海長曝必用" },
-    { name: "減光鏡 (ND/GND)", detail: "控制日出與夕陽的光差比" },
-    { name: "備用電池/記憶卡", detail: "龍脊梯田區充電不便，建議多備一份" }
+    { name: "廣角鏡頭 (16-35mm)", detail: "相公山全景、龍脊梯田大景必備" },
+    { name: "標準/人像 (35mm/50mm)", detail: "灕江漁火、西街人文街拍最佳選擇" },
+    { name: "中長焦 (70-200mm)", detail: "壓縮梯田線條、捕捉遠山晨霧特寫" },
+    { name: "配件", detail: "三腳架、ND減光鏡、包圍曝光用遙控器" }
   ]},
   { category: "機能裝備", items: [
-    { name: "防水機能外套", detail: "6 月桂林多陣雨，山區氣溫多變" },
-    { name: "防滑登山鞋", detail: "龍脊梯田步道濕滑，需有良好抓地力" },
-    { name: "遮陽帽/太陽眼鏡", detail: "做好物理防曬，避免曝曬中暑" }
-  ]},
-  { category: "重要文件", items: [
-    { name: "護照/台胞證", detail: "過關與酒店入住檢查" },
-    { name: "動車訂票資訊", detail: "截圖存檔，防止網路訊號不穩" }
+    { name: "防水外套", detail: "6月梅雨季防雨、山區防風" },
+    { name: "防滑鞋", detail: "龍脊步道、江岸泥濘處需抓地力" }
   ]}
 ];
 
@@ -191,13 +195,28 @@ export default function App() {
                   <span className={`text-[#10B981] transition-transform duration-300 ${expandedIdx === i ? 'rotate-180' : ''}`}>▼</span>
                 </div>
                 <h2 className="text-xl font-black leading-tight text-[#064E3B]">{it.title}</h2>
+                
                 <div className={`overflow-hidden transition-all duration-300 ${expandedIdx === i ? 'max-h-[1200px] mt-4' : 'max-h-0'}`}>
                   <div className="bg-[#F0FDF4] p-5 rounded-3xl border border-dashed border-[#10B981]/30">
+                    <p className="text-[#059669] text-[10px] font-black mb-3 uppercase tracking-widest border-b border-[#10B981]/20 pb-1">攝影指南</p>
+                    
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      <div className="bg-white/50 p-3 rounded-2xl border border-[#10B981]/10">
+                        <p className="text-[10px] font-bold text-[#10B981] mb-1">🔍 建議焦段</p>
+                        <p className="text-xs font-black text-[#064E3B]">{it.lens}</p>
+                      </div>
+                      <div className="bg-white/50 p-3 rounded-2xl border border-[#10B981]/10">
+                        <p className="text-[10px] font-bold text-[#10B981] mb-1">📸 核心事項</p>
+                        <p className="text-xs font-black text-[#064E3B]">{it.core}</p>
+                      </div>
+                    </div>
+
                     <p className="text-[#059669] text-[10px] font-bold mb-2 uppercase tracking-widest">地點詳解</p>
                     <p className="text-[#064E3B] text-sm leading-relaxed mb-4 whitespace-pre-line">{it.desc}</p>
+                    
                     <div className="pt-4 border-t border-[#10B981]/10">
-                      <span className="text-[#10B981] text-[11px] font-bold">📸 攝影筆記：</span>
-                      <span className="text-[#059669] text-[11px] italic">{it.note}</span>
+                      <p className="text-[#10B981] text-[11px] font-bold mb-1">💡 拍攝備註</p>
+                      <p className="text-[#059669] text-[11px] italic leading-snug">{it.note}</p>
                     </div>
                   </div>
                 </div>
@@ -205,7 +224,7 @@ export default function App() {
             ))}
 
             <div className="mt-8 bg-white/60 p-6 rounded-[2.5rem] border-2 border-dashed border-[#10B981]/40 flex items-center space-x-4">
-              <div className="bg-[#10B981] text-white p-3 rounded-2xl text-xl">🏨</div>
+              <div className="bg-[#10B981] text-white p-3 rounded-2xl text-xl shadow-sm">🏨</div>
               <div>
                 <p className="text-[#059669] text-[10px] font-bold uppercase tracking-wider">Tonight's Stay</p>
                 <p className="text-lg font-black text-[#064E3B] leading-tight">{curr.stay}</p>
