@@ -29,7 +29,7 @@ const scheduleData = [
         t: "09:00", title: "遇龍河三橋 (富裡、金龍、遇龍)", 
         lens: "16-35mm (超廣角)", core: "古橋石結構對稱、水面滿月倒影",
         note: "富裡橋/金龍橋/遇龍橋攝影", 
-        desc: "遇龍河位於陽朔縣，常年水質清澈，水流緩慢。富裡橋建於明代永樂年間，長30米，寬5米，高10米，石結構拱橋與倒影相接酷似滿月。遇龍橋是遇龍河上一石拱橋，位於白沙鎮遇龍村旁，明代所建，全長60米，寬5米，高9米，跨度18米，全用石頭砌成，未用灰漿，歷經數百年而無損，是陽朔縣重點文物古蹟。",
+        desc: "遇龍河位於陽朔縣，常年水質清措，水流緩慢。富裡橋建於明代永樂年間，長30米，寬5米，高10米，石結構拱橋與倒影相接酷似滿月。遇龍橋是遇龍河上一石拱橋，位於白沙鎮遇龍村旁，明代所建，全長60米，寬5米，高9米，跨度18米，全用石頭砌成，未用灰漿，歷經數百年而無損，是陽朔縣重點文物古蹟。",
         map: "遇龍河" 
       },
       { 
@@ -160,7 +160,7 @@ const prepList = [
     { name: "三腳架 / 清潔組", detail: "慢快門拍攝必備，隨時清理山區潮濕水氣" }
   ]},
   { category: "戶外機能裝備", items: [
-    { name: "機能防水外套 (Hard Shell)", detail: "6 月雨季必備，山區晨間防風防雨" },
+    { name: "機能防水外套 (硬殼)", detail: "6 月雨季必備，山區晨間防風防雨" },
     { name: "機能戰術背包", detail: "需具備快取功能，方便隨時切換長焦/廣角鏡頭" },
     { name: "防滑登山鞋", detail: "龍脊石板路與江岸溼滑，需良好抓地力" }
   ]},
@@ -180,7 +180,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F0FDF4] pb-36 font-sans text-[#064E3B] text-left">
-      <header className="p-8 pt-16 bg-gradient-to-b from-[#DCFCE7] to-[#F0FDF4] flex items-center space-x-5">
+      <header className="p-8 pt-16 bg-gradient-to-b from-[#DCFCE7] to-[#F0FDF4] flex items-center space-x-5 text-left">
         <div className="flex-shrink-0">
           <svg width="64" height="64" viewBox="0 0 100 100" fill="none" className="shadow-2xl">
             <rect width="100" height="100" rx="25" fill="#064E3B"/>
@@ -191,7 +191,7 @@ export default function App() {
           </svg>
         </div>
         <div>
-          <p className="text-[#059669] font-bold text-[11px] uppercase tracking-[0.3em] mb-1">2026 June Expedition</p>
+          <p className="text-[#059669] font-bold text-[11px] uppercase tracking-[0.3em] mb-1">2026 六月攝影之旅</p>
           <h1 className="text-3xl font-black text-[#064E3B] tracking-tight">桂林攝影行程</h1>
         </div>
       </header>
@@ -199,7 +199,7 @@ export default function App() {
       <main className="px-6">
         {tab === '行程' ? (
           <>
-            <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2 mb-6">
+            <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2 mb-6 text-left">
               {['05','06','07','08','09','10'].map(d=>(
                 <button key={d} onClick={()=>{setDay(d); setExpandedIdx(null);}} className={`flex-1 min-w-[50px] py-4 rounded-2xl border-2 transition-all ${day===d?'bg-[#10B981] border-[#10B981] text-white shadow-md':'bg-white border-[#DCFCE7] text-[#059669]'}`}>
                   <span className="text-lg font-black">{d}</span>
@@ -214,28 +214,28 @@ export default function App() {
             </div>
 
             {curr.items.map((it, i)=>(
-              <div key={i} onClick={() => setExpandedIdx(expandedIdx === i ? null : i)} className={`bg-white p-6 rounded-[2.5rem] border-2 transition-all cursor-pointer mb-5 ${expandedIdx === i ? 'border-[#10B981] shadow-md' : 'border-[#DCFCE7]'}`}>
+              <div key={i} onClick={() => setExpandedIdx(expandedIdx === i ? null : i)} className={`bg-white p-6 rounded-[2.5rem] border-2 transition-all cursor-pointer mb-5 text-left ${expandedIdx === i ? 'border-[#10B981] shadow-md' : 'border-[#DCFCE7]'}`}>
                 <div className="flex justify-between items-start mb-3">
-                  <span className="text-[#059669] font-bold text-xs bg-[#D1FAE5] px-3 py-1 rounded-full">🕒 {it.t}</span>
+                  <span className="text-[#059669] font-bold text-xs bg-[#D1FAE5] px-3 py-1 rounded-full text-left">🕒 {it.t}</span>
                   <span className={`text-[#10B981] transition-transform duration-300 ${expandedIdx === i ? 'rotate-180' : ''}`}>▼</span>
                 </div>
-                <h2 className="text-xl font-black leading-tight text-[#064E3B]">{it.title}</h2>
+                <h2 className="text-xl font-black leading-tight text-[#064E3B] text-left">{it.title}</h2>
                 <div className={`overflow-hidden transition-all duration-300 ${expandedIdx === i ? 'max-h-[1500px] mt-4' : 'max-h-0'}`}>
                   <div className="bg-[#F0FDF4] p-5 rounded-3xl border border-dashed border-[#10B981]/30">
-                    <p className="text-[#059669] text-[10px] font-black mb-3 uppercase tracking-widest border-b border-[#10B981]/20 pb-1">攝影指南</p>
+                    <p className="text-[#059669] text-[10px] font-black mb-3 uppercase tracking-widest border-b border-[#10B981]/20 pb-1 text-left">攝影指南</p>
                     <div className="grid grid-cols-2 gap-3 mb-4">
-                      <div className="bg-white/50 p-3 rounded-2xl border border-[#10B981]/10">
+                      <div className="bg-white/50 p-3 rounded-2xl border border-[#10B981]/10 text-left">
                         <p className="text-[10px] font-bold text-[#10B981] mb-1">🔍 建議焦段</p>
                         <p className="text-xs font-black text-[#064E3B]">{it.lens}</p>
                       </div>
-                      <div className="bg-white/50 p-3 rounded-2xl border border-[#10B981]/10">
+                      <div className="bg-white/50 p-3 rounded-2xl border border-[#10B981]/10 text-left">
                         <p className="text-[10px] font-bold text-[#10B981] mb-1">📸 核心事項</p>
                         <p className="text-xs font-black text-[#064E3B]">{it.core}</p>
                       </div>
                     </div>
-                    <p className="text-[#059669] text-[10px] font-bold mb-2 uppercase tracking-widest">地點詳解</p>
-                    <p className="text-[#064E3B] text-sm leading-relaxed mb-4 whitespace-pre-line text-justify">{it.desc}</p>
-                    <div className="pt-4 border-t border-[#10B981]/10">
+                    <p className="text-[#059669] text-[10px] font-bold mb-2 uppercase tracking-widest text-left">地點詳解</p>
+                    <p className="text-[#064E3B] text-sm leading-relaxed mb-4 whitespace-pre-line text-left">{it.desc}</p>
+                    <div className="pt-4 border-t border-[#10B981]/10 text-left">
                       <span className="text-[#10B981] text-[11px] font-bold">💡 拍攝註記：</span>
                       <span className="text-[#059669] text-[11px] italic">{it.note}</span>
                     </div>
@@ -244,19 +244,19 @@ export default function App() {
               </div>
             ))}
 
-            <div className="mt-8 bg-white/60 p-6 rounded-[2.5rem] border-2 border-dashed border-[#10B981]/40 flex items-center space-x-4 shadow-sm">
+            <div className="mt-8 bg-white/60 p-6 rounded-[2.5rem] border-2 border-dashed border-[#10B981]/40 flex items-center space-x-4 shadow-sm text-left">
               <div className="bg-[#10B981] text-white p-3 rounded-2xl text-xl">🏨</div>
               <div>
-                <p className="text-[#059669] text-[10px] font-bold uppercase tracking-wider">Tonight's Stay</p>
-                <p className="text-lg font-black text-[#064E3B] leading-tight">{curr.stay}</p>
+                <p className="text-[#059669] text-[10px] font-bold uppercase tracking-wider text-left">今晚住宿</p>
+                <p className="text-lg font-black text-[#064E3B] leading-tight text-left">{curr.stay}</p>
               </div>
             </div>
           </>
         ) : (
-          <div className="space-y-8 animate-in fade-in duration-500">
+          <div className="space-y-8 animate-in fade-in duration-500 text-left">
             {prepList.map((cat, idx) => (
               <div key={idx}>
-                <h3 className="text-[#059669] font-black text-sm uppercase tracking-[0.2em] mb-4 flex items-center">
+                <h3 className="text-[#059669] font-black text-sm uppercase tracking-[0.2em] mb-4 flex items-center text-left">
                   <span className="w-8 h-[2px] bg-[#10B981] mr-3"></span>{cat.category}
                 </h3>
                 <div className="grid gap-3">
@@ -278,13 +278,12 @@ export default function App() {
         )}
       </main>
 
-      {/* 底部導覽欄 (移回底部固定位置) */}
       <nav className="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-md rounded-[2.5rem] border-2 border-[#DCFCE7] p-2 flex justify-around shadow-xl z-50">
         <button onClick={() => setTab('行程')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab === '行程' ? 'bg-[#10B981] text-white shadow-inner' : 'text-[#059669]'}`}>
-          <span className="text-lg">⛰️</span><span className="text-[8px] font-black uppercase">Itinerary</span>
+          <span className="text-lg">⛰️</span><span className="text-[10px] font-black">每日行程</span>
         </button>
         <button onClick={() => setTab('準備')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab === '準備' ? 'bg-[#10B981] text-white shadow-inner' : 'text-[#059669]'}`}>
-          <span className="text-lg">🎒</span><span className="text-[8px] font-black uppercase">Preparation</span>
+          <span className="text-lg">🎒</span><span className="text-[10px] font-black">裝備檢查</span>
         </button>
       </nav>
     </div>
