@@ -95,7 +95,7 @@ const scheduleData = [
       },
       { 
         t: "16:00", title: "龍脊平安壯寨 (九龍五虎)", 
-        lens: "70-200mm / 16-35mm", core: "九龍五虎線條、高腳吊腳樓建築",
+        lens: "70-200mm / 16-35mm", core: "九龍五虎線條、夜龍脊燈光",
         note: "拍攝高腳幹欄型建築與梯田", 
         desc: "龍脊梯田規模極其宏大。平安壯寨保持傳統的麻欄式三層木樓，全杉木結構，是桂北地區典型的高腳幹欄型建築。『九龍』指主脈分出來的九條小山樑，『五虎』指五個微凸的小山頭，兩者被梯田所盤繞。z字型的石板道把全寨各戶相連。晚上可拍攝最新夜景『夜龍脊』。",
         map: "龍脊梯田" 
@@ -122,7 +122,7 @@ const scheduleData = [
       },
       { 
         t: "17:00", title: "穿山公園 + 塔山日落", 
-        lens: "70-200mm / 24-70mm", core: "壽佛塔剪影、鐘乳石細節",
+        lens: "70-200mm / 24-70mm", core: "古塔夕陽剪影、壽佛塔特寫",
         note: "捕捉「金針、鵝管」奇觀", 
         desc: "穿山內有奇特鐘乳石岩洞，佈滿如樹枝狀的碳酸鈣結晶『金針』與玻璃管狀的『鵝管』。欣賞塔山上與象鼻山普賢塔遙遙相望的壽佛塔，感受山水城市的悠閒氣氛。塔山紅葉更是名列桂林八景之一。",
         map: "塔山" 
@@ -146,13 +146,6 @@ const scheduleData = [
         note: "紀錄現代建築之美", 
         desc: "遠觀港珠澳大橋，這是世界最長的跨海大橋，全長55公里。隨後參觀日月貝珠海大劇院，由一大一小兩組『貝殼』組成，是中國唯一建設在海島上的歌劇院。",
         map: "珠海" 
-      },
-      { 
-        t: "20:50", title: "澳門-桃園 (星宇 JX206)", 
-        lens: "24-70mm", core: "六天影像總結、星宇體驗",
-        note: "20:50-22:40 抵達台灣", 
-        desc: "帶著滿載的美照與回憶，搭乘星宇航空返回溫暖的家。",
-        map: "澳門機場" 
       }
     ]
   }
@@ -204,11 +197,6 @@ export default function App() {
       </header>
 
       <main className="px-6">
-        <nav className="flex space-x-4 mb-8">
-          <button onClick={() => setTab('行程')} className={`px-6 py-2 rounded-full font-black text-sm transition-all ${tab === '行程' ? 'bg-[#10B981] text-white' : 'bg-white text-[#059669] border border-[#DCFCE7]'}`}>行程</button>
-          <button onClick={() => setTab('準備')} className={`px-6 py-2 rounded-full font-black text-sm transition-all ${tab === '準備' ? 'bg-[#10B981] text-white' : 'bg-white text-[#059669] border border-[#DCFCE7]'}`}>準備</button>
-        </nav>
-
         {tab === '行程' ? (
           <>
             <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-2 mb-6">
@@ -246,7 +234,7 @@ export default function App() {
                       </div>
                     </div>
                     <p className="text-[#059669] text-[10px] font-bold mb-2 uppercase tracking-widest">地點詳解</p>
-                    <p className="text-[#064E3B] text-sm leading-relaxed mb-4 whitespace-pre-line">{it.desc}</p>
+                    <p className="text-[#064E3B] text-sm leading-relaxed mb-4 whitespace-pre-line text-justify">{it.desc}</p>
                     <div className="pt-4 border-t border-[#10B981]/10">
                       <span className="text-[#10B981] text-[11px] font-bold">💡 拍攝註記：</span>
                       <span className="text-[#059669] text-[11px] italic">{it.note}</span>
@@ -273,13 +261,13 @@ export default function App() {
                 </h3>
                 <div className="grid gap-3">
                   {cat.items.map((item, i) => (
-                    <div key={i} className="bg-white p-5 rounded-[2rem] border-2 border-[#DCFCE7] flex items-start space-x-4 shadow-sm">
+                    <div key={i} className="bg-white p-5 rounded-[2rem] border-2 border-[#DCFCE7] flex items-start space-x-4 shadow-sm text-left">
                       <div className="w-6 h-6 rounded-full border-2 border-[#10B981] mt-1 flex-shrink-0 flex items-center justify-center">
                         <div className="w-2 h-2 bg-[#10B981] rounded-full"></div>
                       </div>
                       <div>
-                        <p className="font-black text-[#064E3B] leading-tight">{item.name}</p>
-                        <p className="text-[#059669] text-[10px] mt-1 italic leading-snug">{item.detail}</p>
+                        <p className="font-black text-[#064E3B] leading-tight text-left">{item.name}</p>
+                        <p className="text-[#059669] text-[10px] mt-1 italic leading-snug text-left">{item.detail}</p>
                       </div>
                     </div>
                   ))}
@@ -289,6 +277,16 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* 底部導覽欄 (移回底部固定位置) */}
+      <nav className="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-md rounded-[2.5rem] border-2 border-[#DCFCE7] p-2 flex justify-around shadow-xl z-50">
+        <button onClick={() => setTab('行程')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab === '行程' ? 'bg-[#10B981] text-white shadow-inner' : 'text-[#059669]'}`}>
+          <span className="text-lg">⛰️</span><span className="text-[8px] font-black uppercase">Itinerary</span>
+        </button>
+        <button onClick={() => setTab('準備')} className={`flex-1 flex flex-col items-center p-3 rounded-2xl transition-all ${tab === '準備' ? 'bg-[#10B981] text-white shadow-inner' : 'text-[#059669]'}`}>
+          <span className="text-lg">🎒</span><span className="text-[8px] font-black uppercase">Preparation</span>
+        </button>
+      </nav>
     </div>
   );
 }
