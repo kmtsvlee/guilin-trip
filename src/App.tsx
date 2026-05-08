@@ -1,133 +1,150 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const scheduleData = [
+// 嚴格定義資料結構，徹底消滅紅字
+interface ScheduleItem {
+  t: string;
+  title: string;
+  note: string;
+  desc: string;
+}
+
+interface ScheduleData {
+  day: string;
+  date: string;
+  theme: string;
+  stay: string;
+  meals: string;
+  items: ScheduleItem[];
+}
+
+const scheduleData: ScheduleData[] = [
   { 
-    day: "05", b: "自理", l: "珠海風味 (60)", d: "粥城風味 (60)", 
-    stay: "國際五星 桂林喜來登酒店 (0773-2825588)", 
+    day: "05", date: "06/05 (五)", theme: "台北-澳門-桂林",
+    stay: "桂林喜來登酒店 (0773-2825588)", 
+    meals: "午：珠海風味 / 晚：粥城風味",
     items: [
-      { 
-        t: "08:05", title: "桃園-澳門 (星宇 JX201)", 
-        lens: "24-70mm", core: "機窗雲海、澳門過關紀錄",
-        note: "航班時間 08:05-10:00", 
-        desc: "抵達後由橫琴口岸過關前往珠海。午餐後前往廣州南站搭乘動車前往桂林。",
-        map: "桃園機場" 
-      },
-      { 
-        t: "16:39", title: "廣州南-桂林西 (動車 D1862)", 
-        lens: "35mm / 50mm", core: "車廂人文、窗外喀斯特初探",
-        note: "暫定車次 16:39-19:30", 
-        desc: "入住桂林喜來登酒店。建議準備 35mm 鏡頭記錄車廂內的旅途氛圍。",
-        map: "廣州南站" 
-      }
+      { t: "08:05", title: "桃園-澳門 (星宇 JX201)", note: "航班 08:05-10:00", desc: "抵達後前往珠海，午餐後搭動車前往桂林。" },
+      { t: "16:39", title: "廣州南-桂林西 (動車 D1862)", note: "暫定 16:39-19:30", desc: "開啟喀斯特地貌初探，入住喜來登酒店。" }
     ]
   },
   { 
-    day: "06", b: "酒店內用", l: "農家宴 (60)", d: "啤酒魚 (60)", 
-    stay: "陽朔新西街麗呈華廷酒店 (0773-8818888)", 
+    day: "06", date: "06/06 (六)", theme: "遇龍河與灕江漁火",
+    stay: "陽朔新西街麗呈華廷 (0773-8818888)", 
+    meals: "午：農家宴 / 晚：啤酒魚",
     items: [
-      { 
-        t: "09:00", title: "遇龍河三橋 (富裡、金龍、遇龍)", 
-        lens: "16-35mm (超廣角)", core: "古橋對稱美學、倒影滿月",
-        note: "含富裡橋、金龍橋、遇龍橋拍照", 
-        desc: "捕捉「山青、水秀、洞奇、石美」的自然景致，重點在於石拱橋與倒影構成的圓對稱。",
-        map: "遇龍河" 
-      },
-      { 
-        t: "14:00", title: "興坪古鎮 + 船遊灕江", 
-        lens: "24-105mm / 70-200mm", core: "20元背景、黃昏攝影",
-        note: "安排黃昏時分捕捉煙火氣", 
-        desc: "船遊灘江、興坪古鎮。在黃昏時刻，光影化入天際，呈現最美的國畫意境。",
-        map: "興坪古鎮" 
-      },
-      { 
-        t: "18:00", title: "灕江漁火 (核心攝影)", 
-        lens: "35mm / 50mm (大光圈)", core: "藍調時刻、魚鷹抓魚、傳統漁火",
-        note: "含竹筏+漁夫+魚鷹+漁火，2小時拍攝", 
-        desc: "包含黃昏時安排魚鷹抓魚拍照。註：報價含10次撒網，額外撒網￥25/次。",
-        map: "灕江" 
-      }
+      { t: "09:00", title: "遇龍河三橋 (富裡、金龍、遇龍)", note: "古橋對稱攝影", desc: "捕捉石拱橋與倒影構成的滿月意境。" },
+      { t: "18:00", title: "灕江漁火 (含竹筏/漁夫/魚鷹)", note: "核心！2小時拍攝", desc: "含夕陽拍攝。報價含10次撒網，額外￥25/次。" }
     ]
   },
   { 
-    day: "07", b: "酒店內用", l: "蝴蝶莊園 (60)", d: "陽朔風味 (60)", 
+    day: "07", date: "06/07 (日)", theme: "相公山晨光-陽朔西街",
     stay: "相公山山莊 (13517836588) *需交定金", 
+    meals: "午：蝴蝶莊園 / 晚：陽朔風味",
     items: [
-      { 
-        t: "05:30", title: "陽朔大橋 (拍攝日出)", 
-        lens: "70-200mm / 16-35mm", core: "晨霧孤舟、第一道曙光",
-        note: "俯瞰灕江，拍攝江面霧氣", 
-        desc: "清晨於陽朔大橋搶位，長焦段可捕捉江面上穿梭的竹筏與霧氣。",
-        map: "陽朔大橋" 
-      },
-      { 
-        t: "10:00", title: "陽朔公園 + 西郎山 + 西街風情", 
-        lens: "35mm / 50mm", core: "老街煙火氣、明清建築風格",
-        note: "紀錄中西衝突的人文美學", 
-        desc: "西街古樸典雅，小青瓦、吊腳樓，是捕捉街頭紀實人文的最佳地點。",
-        map: "陽朔西街" 
-      }
+      { t: "05:30", title: "陽朔大橋 (拍攝日出)", note: "捕捉江面晨霧", desc: "俯瞰灕江，拍攝第一道曙光與孤舟。" },
+      { t: "10:00", title: "陽朔公園 + 西街人文", note: "捕捉老街煙火氣", desc: "明清建築風格與中西文化衝突。" }
     ]
   },
   { 
-    day: "08", b: "酒店內用", l: "壯族風味 (60)", d: "龍勝風味 (60)", 
-    stay: "龍脊九龍五虎林舍民宿 (13877351263)", 
+    day: "08", date: "06/08 (一)", theme: "相公山-龍勝梯田",
+    stay: "龍脊九龍五虎林舍 (13877351263)", 
+    meals: "午：壯族風味 / 晚：龍勝風味",
     items: [
-      { 
-        t: "05:00", title: "相公山 (日出雲海)", 
-        lens: "14-24mm / 16-35mm", core: "灕江第一灣全景、群峰彩霞",
-        note: "【重點】世界級攝影基地", 
-        desc: "相公山舉目遠眺，群峰排列有序。是此行捕捉壯闊對稱美的核心點。",
-        map: "相公山" 
-      },
-      { 
-        t: "16:00", title: "龍脊梯田 (九龍五虎 + 夜龍脊)", 
-        lens: "70-200mm / 16-35mm", core: "梯田幾何線條、燈光夜景",
-        note: "含平安梯田、最新夜景拍攝", 
-        desc: "捕捉夕陽下的梯田線條與晚上的『夜龍脊』燈光奇觀。",
-        map: "龍脊梯田" 
-      }
+      { t: "05:00", title: "相公山 (日出雲海)", note: "灕江第一灣全景", desc: "捕捉群峰排列與彩霞。這是此行核心攝影點。" },
+      { t: "16:00", title: "龍脊梯田 (九龍五虎+夜龍脊)", note: "梯田線條與燈光", desc: "拍攝梯田曲線與最新夜景「夜龍脊」。" }
     ]
   },
   { 
-    day: "09", b: "酒店內用", l: "竹筒飯 (60)", d: "九龍酒家 (60)", 
-    stay: "國際五星 桂林喜來登酒店 (0773-2825588)", 
+    day: "09", date: "06/09 (二)", theme: "龍勝晨曦-兩江四湖",
+    stay: "桂林喜來登酒店 (0773-2825588)", 
+    meals: "午：竹筒飯 / 晚：九龍酒家",
     items: [
-      { 
-        t: "05:30", title: "七星伴月 (晨霧日出)", 
-        lens: "24-70mm / 70-200mm", core: "彎月田對稱、龍脊龍形",
-        note: "拍攝平安壯寨1號點", 
-        desc: "七星伴月意指七個小山包圍繞彎月田，極具幾何趣味。",
-        map: "七星伴月" 
-      },
-      { 
-        t: "17:00", title: "兩江四湖 + 日月雙塔 (外觀)", 
-        lens: "16-35mm", core: "城市對稱建築、金銀雙塔",
-        note: "建議使用廣角拍倒影", 
-        desc: "塔山日落後，拍攝杉湖中的金塔銀塔，呈現極致的城市對稱美。",
-        map: "日月雙塔" 
-      }
+      { t: "05:30", title: "七星伴月 (晨霧日出)", note: "平安壯寨1號點", desc: "捕捉宛如巨龍般的梯田線條。" },
+      { t: "17:00", title: "兩江四湖 + 日月雙塔", note: "城市對稱建築", desc: "杉湖中的金塔銀塔，建議使用廣角鏡拍攝對稱美。" }
     ]
   },
   { 
-    day: "10", b: "酒店內用", l: "閩南四合院 (60)", d: "自理", 
+    day: "10", date: "06/10 (三)", theme: "桂林-珠海-台北",
     stay: "溫暖的家", 
+    meals: "午：閩南四合院 / 晚：自理",
     items: [
-      { 
-        t: "07:32", title: "桂林北-珠海站 (動車 G3875)", 
-        lens: "iPhone / 35mm", core: "回程紀實",
-        note: "G3875 班次 07:32-11:04", 
-        desc: "結束桂林段行程。註：此動車票於 4/21 開始售票。",
-        map: "桂林北站" 
-      },
-      { 
-        t: "20:50", title: "澳門-台北 (星宇 JX206)", 
-        lens: "無", core: "平安歸賦",
-        note: "航班時間 20:50-22:40", 
-        desc: "經由港珠澳大橋前往澳門機場。由衷感謝您的參與。",
-        map: "澳門機場" 
-      }
+      { t: "07:32", title: "桂林北-珠海 (動車 G3875)", note: "4/21 開始售票", desc: "車次時間 07:32-11:04。" },
+      { t: "20:50", title: "澳門-台北 (星宇 JX206)", note: "航班 20:50-22:40", desc: "經由港珠澳大橋前往澳門機場，平安返家。" }
     ]
   }
 ];
 
-// 前端 UI 渲染邏輯保持與先前一致，確保機能風視覺效果。
+export default function App() {
+  const [activeDay, setActiveDay] = useState<number>(0);
+  const curr = scheduleData[activeDay];
+
+  return (
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 p-4 md:p-12 flex justify-center font-sans">
+      <div className="w-full max-w-lg bg-zinc-900 rounded-[40px] shadow-2xl overflow-hidden border border-zinc-800 flex flex-col">
+        {/* Header */}
+        <div className="p-8 bg-emerald-700">
+          <div className="flex justify-between items-start mb-6">
+            <span className="px-3 py-1 bg-black/30 rounded-full text-[10px] font-black tracking-widest uppercase">2026 JUN PHOTO</span>
+            <span className="text-2xl">📸</span>
+          </div>
+          <h1 className="text-3xl font-black italic uppercase">Guilin Trip</h1>
+          <p className="text-xs opacity-80 tracking-widest font-bold mt-1">導遊：曾克儉 13977316816</p>
+        </div>
+
+        {/* Day Nav */}
+        <div className="flex p-4 gap-2 overflow-x-auto bg-zinc-950/50 no-scrollbar">
+          {scheduleData.map((d, i) => (
+            <button 
+              key={d.day} 
+              onClick={() => setActiveDay(i)} 
+              className={`flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center font-black transition-all ${
+                activeDay === i ? 'bg-emerald-600 text-white' : 'bg-zinc-800 text-zinc-500 hover:bg-zinc-700'
+              }`}
+            >
+              {d.day}
+            </button>
+          ))}
+        </div>
+
+        {/* Content Area */}
+        <div className="p-8 flex-1">
+          <div className="mb-6 border-l-4 border-emerald-500 pl-4">
+            <p className="text-emerald-500 font-black text-xs italic">{curr.date}</p>
+            <h2 className="text-xl font-black uppercase italic">{curr.theme}</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-3 mb-8">
+            <div className="bg-zinc-800/50 p-4 rounded-2xl border border-zinc-800">
+              <p className="text-[10px] text-zinc-500 font-black uppercase mb-1 italic">🏨 Stay</p>
+              <p className="text-[11px] font-bold">{curr.stay}</p>
+            </div>
+            <div className="bg-zinc-800/50 p-4 rounded-2xl border border-zinc-800">
+              <p className="text-[10px] text-zinc-500 font-black uppercase mb-1 italic">🍽️ Meals</p>
+              <p className="text-[11px] font-bold">{curr.meals}</p>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            {curr.items.map((it, i) => (
+              <div key={i} className="flex gap-4 border-b border-zinc-800 pb-4">
+                <span className="text-emerald-500 text-sm">📍</span>
+                <div>
+                  <h4 className="font-black text-sm italic">{it.title}</h4>
+                  <p className="text-[10px] text-emerald-400 font-bold mb-1">🕒 {it.t} | {it.note}</p>
+                  <p className="text-[11px] text-zinc-500 leading-relaxed">{it.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Footer */}
+        <div className="p-6 bg-zinc-950 border-t border-zinc-800 text-center">
+          <p className="text-[9px] font-black text-zinc-600 tracking-widest italic uppercase">
+            撒網 ￥25/次 | 礦泉水 1瓶/日 | 4/21 售票提醒
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
