@@ -44,7 +44,7 @@ const schedule: DayData[] = [
   },
   {
     date: "06/08", dayOfWeek: "一", location: "相公山 - 龍脊梯田",
-    stay: "龍脊平安壯寨 - 林舍民宿",
+    stay: "龍穎-準五星酒店",
     meals: { b: "飯店內", l: "壯寨風味 (60)", d: "龍勝風味 (60)" },
     items: [
       { t: "05:00", title: "相公山日出攝影 (大 U 型)", desc: "登上相公山遠眺，灕江在此處呈大 U 型迴轉。捕捉雲海、日出灑在群峰間的壯麗線條，視覺震撼。", icon: "camera" },
