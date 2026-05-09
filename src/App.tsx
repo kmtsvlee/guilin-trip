@@ -49,7 +49,7 @@ const schedule: DayData[] = [
     items: [
       { t: "05:00", title: "相公山日出攝影 (大 U 型)", desc: "登上相公山遠眺，灕江在此處呈大 U 型迴轉。捕捉雲海、日出灑在群峰間的壯麗線條，視覺震撼。", icon: "camera" },
       { t: "13:00", title: "黃洛瑤寨 / 長髮表演", desc: "探訪紅瑤族聚居地，拍攝「天下第一長髮村」的民俗生活。紅瑤族女性保留長髮習俗，極具人文攝影價值。", icon: "camera" },
-      { t: "16:00", title: "龍脊平安壯寨 (九龍五虎)", desc: "拍攝著名的「九龍五虎」—指九條山脊與五個山頭。梯田規模宏大，線條隨山勢起伏，捕捉壯族農耕智慧。", note: "需換乘景區車，行李建議精簡", icon: "camera" },
+      { t: "15:00", title: "龍脊平安壯寨 (九龍五虎)", desc: "拍攝著名的「九龍五虎」—指九條山脊與五個山頭。梯田規模宏大，線條隨山勢起伏，捕捉壯族農耕智慧。", note: "需換乘景區車，行李建議精簡", icon: "camera" },
       { t: "17:30", title: "七星伴月攝影", desc: "七個小山包守護彎月狀水田。捕捉斜陽下的梯田線條，感受曲線美學與光影變化。", icon: "camera" }
     ]
   },
@@ -59,8 +59,11 @@ const schedule: DayData[] = [
     meals: { b: "飯店內 (打包)", l: "竹筒飯風味 (60)", d: "九龍酒家 (60)" },
     items: [
       { t: "05:30", title: "平安壯寨 1 號點日出", desc: "捕捉清晨第一道曙光灑在梯田水面上的反射。薄霧繚繞中的壯族吊腳樓構成如詩如畫的晨霧奇觀。", icon: "camera" },
-      { t: "15:00", title: "兩江四湖環城水系", desc: "灕江、桃花江、榕湖、杉湖構成的環城水系，展現「城在景中、景在城中」的美景，體現桂林水城特色。", icon: "camera" },
-      { t: "19:00", title: "日月雙塔夜拍 (杉湖)", desc: "拍攝杉湖中的金塔與銀塔。雙塔璀璨倒影與象鼻山遙遙相望，是桂林地標性夜景，適合慢門長曝。", note: "建議使用三腳架捕捉精確倒影", icon: "camera" }
+      { t: "08:00", title: "梯田線條與水面光影", desc: "龍脊梯田規模極為宏大，線條隨山勢起伏。捕捉水田灌漿時期的反射光與幾何線條之美。", icon: "camera" },
+      { t: "10:00", title: "壯寨民俗人文紀實", desc: "探訪壯族村落，拍攝當地居民的日常生活與獨特的吊腳樓建築結構，感受深山人文靈魂。", icon: "camera" },
+      { t: "14:00", title: "下山返回桂林市區", desc: "結束龍脊攝影行程，搭乘接駁車返回桂林，準備晚上的環城水系夜拍。", icon: "camera" },
+      { t: "19:00", title: "兩江四湖環城水系", desc: "灕江、桃花江、榕湖、杉湖構成的環城水系，展現「城在景中、景在城中」的美景，體現桂林水城特色。", icon: "camera" },
+      { t: "20:30", title: "日月雙塔夜拍 (杉湖)", desc: "拍攝杉湖中的金塔與銀塔。雙塔璀璨倒影與象鼻山遙遙相望，是桂林標誌性夜景，適合慢門長曝。", note: "建議使用三腳架捕捉精確倒影", icon: "camera" }
     ]
   },
   {
@@ -130,16 +133,16 @@ export default function App() {
              <div className="grid grid-cols-3 gap-2 pt-1 text-center items-center">
                <div className="flex flex-col items-center border-r border-white/10">
                   <div className="text-[8px] opacity-40 mb-1 uppercase tracking-tighter text-white/80">早 Breakfast</div>
-                  <div className="text-[12px] font-bold">{c.meals.b}</div>
+                  <div className="text-[12px] font-bold text-white">{c.meals.b}</div>
                </div>
                <div className="flex flex-col items-center border-r border-white/10 px-1">
                   <Briefcase className="w-4 h-4 mb-1 opacity-30" />
                   <div className="text-[8px] opacity-40 mb-1 uppercase tracking-tighter text-white/80">午 Lunch</div>
-                  <div className="text-[12px] font-bold">{c.meals.l}</div>
+                  <div className="text-[12px] font-bold text-white">{c.meals.l}</div>
                </div>
                <div className="flex flex-col items-center">
                   <div className="text-[8px] opacity-40 mb-1 uppercase tracking-tighter text-white/80">晚 Dinner</div>
-                  <div className="text-[12px] font-bold">{c.meals.d}</div>
+                  <div className="text-[12px] font-bold text-white">{c.meals.d}</div>
                </div>
              </div>
           </div>
@@ -159,7 +162,7 @@ export default function App() {
                       {it.icon === 'plane' && <Plane className="w-4 h-4 text-[#2D5A27]/30" />}
                       {it.icon === 'train' && <Train className="w-4 h-4 text-[#2D5A27]/30" />}
                       {it.icon === 'camera' && <Camera className="w-4 h-4 text-[#2D5A27]/30" />}
-                      <h3 className="font-black text-[#2D3A30] text-sm tracking-tight group-hover:text-[#2D5A27] transition-colors">{it.title}</h3>
+                      <h3 className="font-black text-[#2D3A30] text-sm tracking-tight group-hover:text-[#2D5A27] transition-colors uppercase italic leading-tight">{it.title}</h3>
                     </div>
                   </div>
                   {it.desc && <p className="text-[#5A6D60] text-[12.5px] leading-relaxed mb-4 font-medium text-justify">{it.desc}</p>}
@@ -177,7 +180,7 @@ export default function App() {
       ) : (
         <main className="px-6 space-y-6 animate-in slide-in-from-bottom-4 duration-500">
           <div className="text-center py-8">
-            <h2 className="text-2xl font-black text-[#2D5A27] italic uppercase tracking-tighter">Equipment List</h2>
+            <h2 className="text-2xl font-black text-[#2D5A27] italic uppercase tracking-tighter leading-none">Gear Checklist</h2>
             <div className="text-[10px] text-[#A0B0A5] font-black tracking-[0.4em] uppercase mt-2">Ready for Landscape</div>
           </div>
           {gearData.map((g, i) => (
@@ -187,7 +190,7 @@ export default function App() {
               </h3>
               <ul className="grid grid-cols-1 gap-4">
                 {g.list.map((l, j) => (
-                  <li key={j} className="flex items-center gap-3 text-[13.5px] font-bold text-[#4A5D50]">
+                  <li key={j} className="text-[13.5px] font-bold text-[#4A5D50] flex items-center gap-3">
                     <ChevronRight className="w-4 h-4 text-[#2D5A27] opacity-30 shrink-0" /> {l}
                   </li>
                 ))}
