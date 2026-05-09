@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-// 這裡確保所有圖示都是 Lucide 官方標準名稱
+import { useState } from 'react';
 import { Camera, MapPin, Clock, Phone, Briefcase, Info, ChevronRight } from 'lucide-react';
 
 // 1. 強制定義資料結構，排除所有 undefined 的可能
@@ -19,6 +18,7 @@ interface ScheduleData {
   items: ScheduleItem[];
 }
 
+// 2. 建立資料清單
 const scheduleData: ScheduleData[] = [
   {
     date: "06/05",
@@ -61,13 +61,13 @@ const gearList = [
 export default function App() {
   const [activeDay, setActiveDay] = useState(0);
   
-  // 使用類型斷言 (as ScheduleData) 徹底消除 TypeScript 對 undefined 的焦慮
-  const curr = (scheduleData[activeDay] || scheduleData[0]) as ScheduleData;
+  // 核心修復：確保 curr 絕對不是空值，徹底封鎖 TypeScript 報錯
+  const curr: ScheduleData = scheduleData[activeDay] || scheduleData[0];
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 p-4 md:p-12 flex justify-center font-sans tracking-tight">
       <div className="w-full max-w-2xl">
-        {/* Header */}
+        {/* 標題區 */}
         <header className="mb-10 border-b border-zinc-800 pb-8">
           <h1 className="text-4xl font-black italic mb-4 tracking-tighter uppercase">Guilin Trip</h1>
           <div className="flex items-center gap-2 text-sm text-zinc-400 font-medium">
@@ -76,7 +76,7 @@ export default function App() {
           </div>
         </header>
 
-        {/* Date Tabs */}
+        {/* 日期切換 */}
         <nav className="flex gap-2 mb-10 overflow-x-auto pb-2 scrollbar-hide">
           {scheduleData.map((d, idx) => (
             <button
@@ -91,11 +91,11 @@ export default function App() {
           ))}
         </nav>
 
-        {/* Daily Content */}
+        {/* 今日行程內容 */}
         <div className="mb-12">
           <h2 className="text-3xl font-black italic mb-6 leading-tight">
             {curr.date} ({curr.dayOfWeek}) <br />
-            <span className="text-zinc-500 not-italic text-2xl uppercase font-bold tracking-normal">{curr.location}</span>
+            <span className="text-zinc-500 not-italic text-2xl uppercase font-bold">{curr.location}</span>
           </h2>
 
           <div className="grid gap-3 mb-10">
@@ -117,13 +117,13 @@ export default function App() {
             )}
           </div>
 
-          {/* Timeline Items */}
+          {/* 時間線項目 */}
           <div className="space-y-10">
             {curr.items.map((item, idx) => (
               <div key={idx} className="relative pl-7 border-l-2 border-zinc-900">
                 <div className="absolute -left-[9px] top-0 w-4 h-4 bg-red-600 rounded-full border-[3px] border-zinc-950" />
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[10px] font-black text-zinc-400 bg-zinc-900 px-2 py-1 border border-zinc-800 flex items-center gap-1.5 shadow-sm">
+                  <span className="text-[10px] font-black text-zinc-400 bg-zinc-900 px-2 py-1 border border-zinc-800 flex items-center gap-1.5">
                     <Clock className="w-3 h-3 text-red-500" /> {item.t}
                   </span>
                   <h3 className="text-xl font-black italic uppercase tracking-tight text-zinc-100">{item.title}</h3>
@@ -141,7 +141,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Gear Checklist - 確保重新渲染 */}
+        {/* 裝備檢查清單 */}
         <section className="mt-24 border-t border-zinc-900 pt-12 pb-24">
           <h2 className="text-2xl font-black italic mb-10 flex items-center gap-3 uppercase tracking-tighter">
             <Camera className="w-7 h-7 text-red-600" /> Equipment Checklist
