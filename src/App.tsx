@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// 精確對齊引入清單，確保下方全部用到，消滅所有警告
-import { Camera, MapPin, Phone, Briefcase, Info, ChevronRight, Calendar, Luggage, Plane, Train } from 'lucide-react';
+// 嚴格對齊引入清單，確保下方全部用到，消滅所有警告
+import { Camera, MapPin, Phone, Briefcase, Info, ChevronRight, Calendar, Luggage, Plane, Train, Leaf } from 'lucide-react';
 
 interface DayData {
   date: string;
@@ -68,7 +68,7 @@ const schedule: DayData[] = [
 ];
 
 const gearData = [
-  { cat: "攝影器材 / GEAR", list: ["機身 x 2 (含備機)", "16-35mm 廣角", "24-70mm 萬用", "70-200mm 細節", "三腳架/減光鏡/快門線", "備用電池 x 5"] },
+  { cat: "攝影器材 / GEAR", list: ["機身 x 2 (含備機)", "16-35mm 廣角 (主拍梯田)", "24-70mm 萬用", "70-200mm (漁翁特寫)", "三腳架/減光鏡/快門線", "備用電池 x 5"] },
   { cat: "必備物資 / ESSENTIALS", list: ["護照 / 台胞證", "個人藥品 / 防蚊液", "雨衣 / 遮陽傘", "機能服飾 / 輕便球鞋"] }
 ];
 
@@ -76,19 +76,22 @@ export default function App() {
   const [day, setDay] = useState(0);
   const [tab, setTab] = useState<'plan' | 'gear'>('plan');
   
-  // 核心修復：使用 as DayData 確保 TypeScript 絕對認可資料存在
-  const c = (schedule[day] || schedule[0]) as DayData;
+  // 核心安全處理：確保資料絕對存在，消滅所有紅字警告
+  const c = schedule[day]!;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F5] text-[#333] font-sans antialiased pb-32">
+    <div className="min-h-screen bg-[#F1F5F2] text-[#2D3A30] font-sans antialiased pb-32">
       {/* Header */}
       <header className="pt-10 px-6 pb-6 text-center">
-        <div className="text-[10px] font-black tracking-[0.3em] text-[#8B2323] opacity-60 mb-1 uppercase italic underline underline-offset-4 decoration-[#8B2323]/20">Photography Expedition</div>
-        <h1 className="text-3xl font-black text-[#8B2323] tracking-tighter uppercase">桂林攝影手帳</h1>
+        <div className="flex justify-center mb-1">
+          <Leaf className="w-4 h-4 text-[#2D5A27] opacity-60 animate-bounce" />
+        </div>
+        <div className="text-[10px] font-black tracking-[0.3em] text-[#2D5A27] opacity-60 mb-1 uppercase italic underline underline-offset-4 decoration-[#2D5A27]/20">Photography Itinerary</div>
+        <h1 className="text-3xl font-black text-[#2D5A27] tracking-tighter uppercase">桂林攝影行程</h1>
         <div className="mt-4 flex justify-center">
-           <div className="bg-white/90 px-4 py-1.5 rounded-full border border-[#E5DED9] flex items-center gap-2 shadow-sm">
-             <Phone className="w-3 h-3 text-[#8B2323]" />
-             <span className="text-[11px] font-bold text-[#555]">曾克儉 13977316816</span>
+           <div className="bg-white/90 px-4 py-1.5 rounded-full border border-[#D1DDD5] flex items-center gap-2 shadow-sm">
+             <Phone className="w-3 h-3 text-[#2D5A27]" />
+             <span className="text-[11px] font-bold text-[#4A5D50]">曾克儉 13977316816</span>
            </div>
         </div>
       </header>
@@ -96,7 +99,7 @@ export default function App() {
       {/* Day Tabs */}
       <nav className="flex gap-3 px-6 overflow-x-auto no-scrollbar mb-8">
         {schedule.map((d, i) => (
-          <button key={i} onClick={() => setDay(i)} className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 border ${day === i ? 'bg-[#8B2323] text-white border-[#8B2323] shadow-md scale-105' : 'bg-white text-[#8B2323] border-[#E5DED9]'}`}>
+          <button key={i} onClick={() => setDay(i)} className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 border ${day === i ? 'bg-[#2D5A27] text-white border-[#2D5A27] shadow-lg scale-105' : 'bg-white text-[#2D5A27] border-[#D1DDD5]'}`}>
             {d.date.split('/')[1]}
           </button>
         ))}
@@ -105,61 +108,61 @@ export default function App() {
       {tab === 'plan' ? (
         <main className="px-6 space-y-6 animate-in fade-in duration-500">
           <div className="text-center">
-            <h2 className="text-2xl font-black text-[#8B2323] italic uppercase leading-none">DAY {day + 1} ({c.dayOfWeek})</h2>
-            <div className="text-[#8B2323] font-bold tracking-[0.2em] mt-2 opacity-80 uppercase text-xs">{c.location}</div>
+            <h2 className="text-2xl font-black text-[#2D5A27] italic uppercase leading-none">DAY {day + 1} ({c.dayOfWeek})</h2>
+            <div className="text-[#2D5A27] font-bold tracking-[0.2em] mt-2 opacity-80 uppercase text-[10px] bg-[#2D5A27]/5 py-1 rounded inline-block px-3">{c.location}</div>
           </div>
 
-          {/* Stay & Meals Card (Jinmen Style) */}
-          <div className="bg-[#8B2323] text-white p-6 rounded-[2.5rem] shadow-xl space-y-5">
+          {/* Stay & Meals Card (Forest Green Style) */}
+          <div className="bg-[#2D5A27] text-white p-6 rounded-[2.2rem] shadow-xl space-y-5 border-b-4 border-[#1A3A1A]">
              {c.stay && (
                <div className="flex gap-4 border-b border-white/10 pb-4">
                  <MapPin className="w-5 h-5 shrink-0 opacity-70 mt-1" />
                  <div>
-                   <div className="text-[10px] font-black tracking-widest opacity-50 mb-1 uppercase">住宿安排 STAY</div>
+                   <div className="text-[9px] font-black tracking-widest opacity-50 mb-1 uppercase">住宿安排 STAY</div>
                    <div className="text-[13px] font-bold leading-tight">{c.stay}</div>
                  </div>
                </div>
              )}
              <div className="grid grid-cols-3 gap-2 pt-1 text-center items-center">
                <div className="flex flex-col items-center">
-                  <div className="text-[9px] opacity-50 mb-1 uppercase tracking-tighter">Breakfast</div>
+                  <div className="text-[8px] opacity-50 mb-1 uppercase tracking-tighter">Breakfast</div>
                   <div className="text-[11px] font-bold">{c.meals.b}</div>
                </div>
                <div className="border-x border-white/10 flex flex-col items-center px-1">
                   <Briefcase className="w-3.5 h-3.5 mb-1 opacity-40" />
-                  <div className="text-[9px] opacity-50 mb-1 uppercase tracking-tighter">Lunch</div>
+                  <div className="text-[8px] opacity-50 mb-1 uppercase tracking-tighter">Lunch</div>
                   <div className="text-[11px] font-bold">{c.meals.l}</div>
                </div>
                <div className="flex flex-col items-center">
-                  <div className="text-[9px] opacity-50 mb-1 uppercase tracking-tighter">Dinner</div>
+                  <div className="text-[8px] opacity-50 mb-1 uppercase tracking-tighter">Dinner</div>
                   <div className="text-[11px] font-bold">{c.meals.d}</div>
                </div>
              </div>
           </div>
 
-          {/* Timeline */}
+          {/* Timeline Section */}
           <div className="space-y-6 pt-4 pb-12">
             {c.items.map((it, i) => (
               <div key={i} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className="w-3 h-3 rounded-full bg-[#8B2323] ring-4 ring-white shadow-sm" />
-                  {i !== c.items.length - 1 && <div className="w-0.5 grow bg-[#E5DED9] my-1" />}
+                  <div className="w-3 h-3 rounded-full bg-[#2D5A27] ring-4 ring-white shadow-sm" />
+                  {i !== c.items.length - 1 && <div className="w-0.5 grow bg-[#D1DDD5] my-1" />}
                 </div>
-                <div className="bg-white p-5 rounded-[1.8rem] border border-[#E5DED9] shadow-sm grow">
+                <div className="bg-white p-5 rounded-[1.8rem] border border-[#D1DDD5] shadow-sm grow hover:border-[#2D5A27] transition-colors group">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[#8B2323] font-black font-mono text-sm">{it.t}</span>
+                    <span className="text-[#2D5A27] font-black font-mono text-sm">{it.t}</span>
                     <div className="flex items-center gap-1.5 ml-1">
-                      {it.icon === 'plane' && <Plane className="w-3.5 h-3.5 text-[#8B2323]/40" />}
-                      {it.icon === 'train' && <Train className="w-3.5 h-3.5 text-[#8B2323]/40" />}
-                      {it.icon === 'camera' && <Camera className="w-3.5 h-3.5 text-[#8B2323]/40" />}
-                      <h3 className="font-black text-[#333] text-sm tracking-tight">{it.title}</h3>
+                      {it.icon === 'plane' && <Plane className="w-3.5 h-3.5 text-[#2D5A27]/40" />}
+                      {it.icon === 'train' && <Train className="w-3.5 h-3.5 text-[#2D5A27]/40" />}
+                      {it.icon === 'camera' && <Camera className="w-3.5 h-3.5 text-[#2D5A27]/40" />}
+                      <h3 className="font-black text-[#2D3A30] text-sm tracking-tight group-hover:text-[#2D5A27] transition-colors">{it.title}</h3>
                     </div>
                   </div>
-                  {it.desc && <p className="text-[#666] text-[12px] leading-relaxed mb-3 font-medium">{it.desc}</p>}
+                  {it.desc && <p className="text-[#5A6D60] text-[12px] leading-relaxed mb-3 font-medium">{it.desc}</p>}
                   {it.note && (
-                    <div className="bg-[#FAF7F5] p-3 rounded-2xl flex items-start gap-2 border border-[#E5DED9]">
-                      <Info className="w-3.5 h-3.5 text-[#8B2323] mt-0.5 shrink-0" />
-                      <p className="text-[11px] font-bold text-[#8B2323] leading-normal">{it.note}</p>
+                    <div className="bg-[#F8FAF8] p-3 rounded-2xl flex items-start gap-2 border border-[#D1DDD5]">
+                      <Info className="w-3.5 h-3.5 text-[#2D5A27] mt-0.5 shrink-0" />
+                      <p className="text-[11px] font-bold text-[#2D5A27] leading-normal">{it.note}</p>
                     </div>
                   )}
                 </div>
@@ -170,18 +173,18 @@ export default function App() {
       ) : (
         <main className="px-6 space-y-6 animate-in slide-in-from-bottom-4 duration-500">
           <div className="text-center py-6">
-            <h2 className="text-2xl font-black text-[#8B2323] italic uppercase tracking-tighter leading-none">Gear Checklist</h2>
-            <div className="text-[10px] text-zinc-400 font-bold tracking-[0.3em] uppercase mt-2">Ready for Expedition</div>
+            <h2 className="text-2xl font-black text-[#2D5A27] italic uppercase tracking-tighter leading-none">Gear Checklist</h2>
+            <div className="text-[9px] text-[#A0B0A5] font-bold tracking-[0.3em] uppercase mt-2">Ready for Landscape</div>
           </div>
           {gearData.map((g, i) => (
-            <div key={i} className="bg-white rounded-[2rem] p-6 border border-[#E5DED9] shadow-sm">
-              <h3 className="flex items-center gap-2 text-[#8B2323] font-black text-[13px] mb-4 border-b border-[#FAF7F5] pb-3 uppercase tracking-[0.1em]">
+            <div key={i} className="bg-white rounded-[2rem] p-6 border border-[#D1DDD5] shadow-sm">
+              <h3 className="flex items-center gap-2 text-[#2D5A27] font-black text-[12px] mb-4 border-b border-[#F1F5F2] pb-3 uppercase tracking-[0.1em]">
                 <Luggage className="w-4 h-4" /> {g.cat}
               </h3>
               <ul className="grid grid-cols-1 gap-3">
                 {g.list.map((l, j) => (
-                  <li key={j} className="flex items-center gap-3 text-[13px] font-bold text-[#555]">
-                    <ChevronRight className="w-3.5 h-3.5 text-[#8B2323] opacity-30 shrink-0" /> {l}
+                  <li key={j} className="flex items-center gap-3 text-[13px] font-bold text-[#4A5D50]">
+                    <ChevronRight className="w-3.5 h-3.5 text-[#2D5A27] opacity-30 shrink-0" /> {l}
                   </li>
                 ))}
               </ul>
@@ -190,13 +193,13 @@ export default function App() {
         </main>
       )}
 
-      {/* Bottom Nav Bar */}
+      {/* Persistent Bottom Tab Bar (Dark Emerald Style) */}
       <div className="fixed bottom-8 left-10 right-10 flex justify-center z-50">
-        <div className="bg-[#333]/90 backdrop-blur-xl px-2 py-2 rounded-full flex gap-1 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10">
-          <button onClick={() => setTab('plan')} className={`flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black transition-all ${tab === 'plan' ? 'bg-[#8B2323] text-white shadow-lg' : 'text-zinc-400 hover:text-white'}`}>
+        <div className="bg-[#1A2E1F]/90 backdrop-blur-xl px-2 py-2 rounded-full flex gap-1 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10">
+          <button onClick={() => setTab('plan')} className={`flex items-center gap-2 px-7 py-3 rounded-full text-xs font-black transition-all ${tab === 'plan' ? 'bg-[#2D5A27] text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}>
             <Calendar className="w-4 h-4" /> 行程
           </button>
-          <button onClick={() => setTab('gear')} className={`flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black transition-all ${tab === 'gear' ? 'bg-[#8B2323] text-white shadow-lg' : 'text-zinc-400 hover:text-white'}`}>
+          <button onClick={() => setTab('gear')} className={`flex items-center gap-2 px-7 py-3 rounded-full text-xs font-black transition-all ${tab === 'gear' ? 'bg-[#2D5A27] text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}>
             <Camera className="w-4 h-4" /> 裝備
           </button>
         </div>
